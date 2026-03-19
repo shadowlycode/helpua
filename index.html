@@ -3263,13 +3263,7 @@
       function updateStickyBar() {
         if (currentView !== "home") return;
         var bar = document.getElementById("sticky-bar");
-        var hero = document.getElementById("hero");
-        var b = hero.getBoundingClientRect().bottom;
-        if (b < window.innerHeight * 0.55) {
-          bar.classList.add("show");
-        } else {
-          bar.classList.remove("show");
-        }
+        bar.classList.remove("show");
       }
       window.addEventListener("scroll", updateStickyBar, { passive: true });
       window.addEventListener("resize", updateStickyBar, { passive: true });
