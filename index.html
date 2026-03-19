@@ -1,0 +1,3279 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>Help UA — Юридична допомога військовим</title>
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      :root {
+        --navy: #080f1e;
+        --navy2: #0b1729;
+        --blue-ua: #1a3aff;
+        --yellow-ua: #f0d000;
+        --gold: #c8a84b;
+        --tg: #229ed9;
+        --white: #fff;
+        --text-dim: rgba(255, 255, 255, 0.55);
+        --border-dim: rgba(255, 255, 255, 0.08);
+        --font: -apple-system, "Helvetica Neue", Arial, sans-serif;
+        --t: 0.22s ease;
+      }
+      html {
+        -webkit-text-size-adjust: 100%;
+      }
+      body {
+        font-family: var(--font);
+        background: var(--navy);
+        color: var(--white);
+        min-height: 100dvh;
+        overflow-x: hidden;
+      }
+
+      /* ── VIEWS ───────────────────────────────── */
+      .view {
+        display: none;
+      }
+      .view.active {
+        display: block;
+      }
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateX(50px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      @keyframes slideBack {
+        from {
+          opacity: 0;
+          transform: translateX(-24px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      .anim-slide-in {
+        animation: slideIn 0.28s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+      .anim-slide-back {
+        animation: slideBack 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+
+      /* ── HEADER ──────────────────────────────── */
+      #header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        height: 58px;
+        padding: 0 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: rgba(8, 15, 30, 0.95);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      }
+      .logo-wrap {
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        line-height: 1;
+        cursor: pointer;
+        border: none;
+        background: none;
+        padding: 0;
+      }
+      .logo-row {
+        display: flex;
+        align-items: flex-start;
+        gap: 6px;
+      }
+      .logo-main {
+        font-size: 1.4rem;
+        font-weight: 900;
+        letter-spacing: -0.03em;
+        line-height: 1;
+      }
+      .logo-main .help {
+        color: var(--blue-ua);
+      }
+      .logo-main .ua {
+        color: var(--yellow-ua);
+      }
+      .badge-247 {
+        background: #22c55e;
+        color: #fff;
+        font-size: 0.6rem;
+        font-weight: 800;
+        padding: 3px 6px;
+        border-radius: 5px;
+        margin-top: 1px;
+        line-height: 1;
+      }
+      .logo-sub {
+        font-size: 0.62rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: var(--text-dim);
+        font-weight: 500;
+        margin-top: 3px;
+      }
+      .header-phone {
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: var(--yellow-ua);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        white-space: nowrap;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .header-right {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .back-btn {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(255, 255, 255, 0.07);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 8px;
+        padding: 6px 12px;
+        color: rgba(255, 255, 255, 0.75);
+        font-size: 0.82rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: background var(--t);
+        -webkit-tap-highlight-color: transparent;
+        cursor: pointer;
+      }
+      .back-btn:hover {
+        background: rgba(255, 255, 255, 0.13);
+      }
+
+      /* ── HERO ────────────────────────────────── */
+      #hero {
+        min-height: 100dvh;
+        min-height: 100vh;
+        padding: 58px 0 84px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+        background:
+          radial-gradient(
+            ellipse 100% 60% at 50% -10%,
+            rgba(26, 58, 255, 0.16) 0%,
+            transparent 60%
+          ),
+          radial-gradient(
+            ellipse 60% 40% at 90% 95%,
+            rgba(200, 168, 75, 0.07) 0%,
+            transparent 55%
+          ),
+          var(--navy);
+      }
+      #hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+          linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.018) 1px,
+            transparent 1px
+          );
+        background-size: 48px 48px;
+      }
+      .hero-inner {
+        position: relative;
+        z-index: 1;
+        padding: 16px 16px 0;
+        max-width: 480px;
+        margin: 0 auto;
+        width: 100%;
+      }
+      .hero-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        background: rgba(255, 255, 255, 0.055);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 50px;
+        padding: 5px 13px;
+        font-size: 0.68rem;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.58);
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+        margin-bottom: 14px;
+      }
+      .dot-live {
+        width: 7px;
+        height: 7px;
+        background: #22c55e;
+        border-radius: 50%;
+        animation: blink 2s infinite;
+        flex-shrink: 0;
+      }
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.2;
+        }
+      }
+      .hero-heading {
+        font-size: clamp(1.8rem, 7.5vw, 2.5rem);
+        font-weight: 900;
+        line-height: 1.08;
+        letter-spacing: -0.03em;
+        margin-bottom: 16px;
+      }
+      .hero-heading .accent {
+        color: var(--yellow-ua);
+      }
+      .hero-sub {
+        font-size: 0.88rem;
+        color: var(--text-dim);
+        line-height: 1.65;
+        margin-bottom: 14px;
+        max-width: 340px;
+      }
+      .tags-wrap {
+        margin-bottom: 22px;
+      }
+      .tags-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        align-items: center;
+      }
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        color: rgba(255, 255, 255, 0.7);
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        white-space: nowrap;
+        cursor: default;
+        transition:
+          background var(--t),
+          border-color var(--t),
+          color var(--t);
+      }
+      .tag:hover {
+        background: rgba(200, 168, 75, 0.12);
+        border-color: rgba(200, 168, 75, 0.32);
+        color: rgba(240, 208, 80, 0.9);
+      }
+      .tag-etc {
+        font-size: 0.8rem;
+        color: var(--text-dim);
+        line-height: 1.5;
+        padding: 2px 0;
+        font-style: italic;
+      }
+
+      /* ── ACTION BLOCKS ───────────────────────── */
+      .action-blocks {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .ab {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        min-height: 68px;
+        padding: 0 16px 0 10px;
+        border-radius: 18px;
+        text-decoration: none;
+        cursor: pointer;
+        font-family: var(--font);
+        position: relative;
+        overflow: hidden;
+        -webkit-tap-highlight-color: transparent;
+        transition:
+          transform var(--t),
+          filter var(--t);
+        border: none;
+      }
+      .ab:active {
+        transform: scale(0.975);
+      }
+
+      /* CALL */
+      .ab-call {
+        background: linear-gradient(
+          135deg,
+          #b8880a 0%,
+          #e8b820 30%,
+          #f5d040 55%,
+          #e0a810 80%,
+          #b07808 100%
+        );
+        box-shadow:
+          0 0 28px rgba(220, 170, 10, 0.55),
+          0 0 60px rgba(220, 170, 10, 0.2),
+          inset 0 1px 0 rgba(255, 255, 255, 0.35),
+          inset 0 -2px 0 rgba(0, 0, 0, 0.2);
+      }
+      .ab-call:hover {
+        filter: brightness(1.1);
+        box-shadow:
+          0 0 40px rgba(220, 170, 10, 0.7),
+          0 0 80px rgba(220, 170, 10, 0.3),
+          inset 0 1px 0 rgba(255, 255, 255, 0.4),
+          inset 0 -2px 0 rgba(0, 0, 0, 0.2);
+      }
+      .ab-call-wrap {
+        position: relative;
+      }
+      .ab-online {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 0.68rem;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.65);
+        letter-spacing: 0.05em;
+        margin-bottom: 5px;
+        margin-left: 4px;
+      }
+      .ab-online-dot {
+        width: 7px;
+        height: 7px;
+        background: #22c55e;
+        border-radius: 50%;
+        animation: blink 2s infinite;
+      }
+      .ab-call .ab-icon-wrap {
+        width: 46px;
+        height: 46px;
+        border-radius: 12px;
+        background: rgba(0, 0, 0, 0.22);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        margin-right: 14px;
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.15),
+          inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+      }
+      .ab-call .ab-label {
+        color: #0f1e08;
+        font-size: 1.05rem;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
+      }
+      .ab-call .ab-hint {
+        color: rgba(15, 30, 8, 0.65);
+        font-size: 0.75rem;
+        font-weight: 600;
+        margin-top: 1px;
+      }
+      .ab-call .ab-arr {
+        margin-left: auto;
+        flex-shrink: 0;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      }
+
+      /* APP */
+      .ab-app {
+        background: linear-gradient(
+          135deg,
+          #0a1a50 0%,
+          #0d2278 40%,
+          #1535aa 70%,
+          #0d2278 100%
+        );
+        border: 1.5px solid rgba(60, 120, 255, 0.5);
+        box-shadow:
+          0 0 22px rgba(40, 100, 255, 0.35),
+          0 0 50px rgba(40, 100, 255, 0.12),
+          inset 0 1px 0 rgba(140, 180, 255, 0.2),
+          inset 0 0 30px rgba(30, 80, 220, 0.15);
+      }
+      .ab-app:hover {
+        box-shadow:
+          0 0 32px rgba(40, 100, 255, 0.55),
+          0 0 70px rgba(40, 100, 255, 0.2),
+          inset 0 1px 0 rgba(140, 180, 255, 0.3);
+      }
+      .ab-app .ab-icon-wrap {
+        width: 46px;
+        height: 46px;
+        border-radius: 12px;
+        background: rgba(30, 80, 220, 0.35);
+        border: 1px solid rgba(80, 140, 255, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        margin-right: 14px;
+      }
+      .ab-app .ab-label {
+        color: #fff;
+        font-size: 1.05rem;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+      }
+      .ab-app .ab-hint {
+        color: rgba(180, 210, 255, 0.7);
+        font-size: 0.75rem;
+        margin-top: 1px;
+      }
+      .ab-app .ab-badge {
+        margin-left: auto;
+        flex-shrink: 0;
+        background: rgba(40, 100, 255, 0.25);
+        border: 1px solid rgba(80, 150, 255, 0.5);
+        border-radius: 20px;
+        padding: 5px 12px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: rgba(180, 220, 255, 0.95);
+        white-space: nowrap;
+        box-shadow: 0 0 10px rgba(60, 120, 255, 0.3);
+      }
+
+      /* PRICES */
+      .ab-prices {
+        background: linear-gradient(
+          135deg,
+          #141008 0%,
+          #1e1808 40%,
+          #251e0a 70%,
+          #181208 100%
+        );
+        border: 1.5px solid rgba(200, 160, 40, 0.4);
+        box-shadow:
+          0 0 22px rgba(200, 160, 20, 0.25),
+          0 0 50px rgba(200, 160, 20, 0.08),
+          inset 0 1px 0 rgba(220, 180, 60, 0.15);
+      }
+      .ab-prices:hover {
+        box-shadow:
+          0 0 32px rgba(200, 160, 20, 0.45),
+          0 0 70px rgba(200, 160, 20, 0.15),
+          inset 0 1px 0 rgba(220, 180, 60, 0.2);
+      }
+      .ab-prices .ab-icon-wrap {
+        width: 46px;
+        height: 46px;
+        border-radius: 12px;
+        background: rgba(180, 130, 10, 0.2);
+        border: 1px solid rgba(200, 160, 40, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        margin-right: 14px;
+      }
+      .ab-prices .ab-label {
+        color: #f0d070;
+        font-size: 1.05rem;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+      }
+      .ab-prices .ab-hint {
+        color: rgba(200, 170, 80, 0.65);
+        font-size: 0.75rem;
+        margin-top: 1px;
+      }
+      .ab-prices .ab-arr {
+        margin-left: auto;
+        flex-shrink: 0;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: rgba(180, 130, 10, 0.25);
+        border: 1px solid rgba(200, 160, 40, 0.35);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* LAWYERS */
+      .ab-lawyers {
+        background: linear-gradient(
+          135deg,
+          #060c22 0%,
+          #090f2a 40%,
+          #0c1535 70%,
+          #070c22 100%
+        );
+        border: 1.5px solid rgba(50, 100, 220, 0.38);
+        box-shadow:
+          0 0 20px rgba(30, 80, 220, 0.28),
+          0 0 45px rgba(30, 80, 220, 0.08),
+          inset 0 1px 0 rgba(80, 140, 255, 0.12);
+      }
+      .ab-lawyers:hover {
+        box-shadow:
+          0 0 30px rgba(30, 80, 220, 0.48),
+          0 0 65px rgba(30, 80, 220, 0.15),
+          inset 0 1px 0 rgba(80, 140, 255, 0.18);
+      }
+      .ab-lawyers .ab-icon-wrap {
+        width: 46px;
+        height: 46px;
+        border-radius: 12px;
+        background: rgba(20, 60, 180, 0.3);
+        border: 1px solid rgba(50, 100, 220, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        margin-right: 14px;
+      }
+      .ab-lawyers .ab-label {
+        color: rgba(180, 210, 255, 0.95);
+        font-size: 1.05rem;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+      }
+      .ab-lawyers .ab-hint {
+        color: rgba(120, 170, 255, 0.6);
+        font-size: 0.75rem;
+        margin-top: 1px;
+      }
+      .ab-lawyers .ab-arr {
+        margin-left: auto;
+        flex-shrink: 0;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: rgba(30, 70, 200, 0.25);
+        border: 1px solid rgba(60, 110, 240, 0.35);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .ab-lawyers-right {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-left: auto;
+      }
+      .ab-avatars {
+        display: flex;
+      }
+      .ab-avatar {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        border: 2px solid rgba(8, 15, 30, 0.9);
+        margin-left: -9px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.62rem;
+        font-weight: 800;
+        color: #fff;
+      }
+      .ab-avatar:first-child {
+        margin-left: 0;
+      }
+
+      /* CONTACTS */
+      .ab-contacts {
+        background: linear-gradient(
+          135deg,
+          #0e1220 0%,
+          #121828 40%,
+          #161e30 70%,
+          #0e1220 100%
+        );
+        border: 1.5px solid rgba(180, 140, 40, 0.35);
+        box-shadow:
+          0 0 20px rgba(180, 140, 20, 0.2),
+          inset 0 1px 0 rgba(200, 160, 50, 0.1);
+      }
+      .ab-contacts:hover {
+        box-shadow:
+          0 0 32px rgba(180, 140, 20, 0.38),
+          0 0 60px rgba(180, 140, 20, 0.1),
+          inset 0 1px 0 rgba(200, 160, 50, 0.15);
+      }
+      .ab-contacts .ab-multi-icons {
+        display: flex;
+        align-items: center;
+        flex-shrink: 0;
+        margin-right: 14px;
+      }
+      .ab-contacts .ab-mini-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: -6px;
+        flex-shrink: 0;
+      }
+      .ab-contacts .ab-mini-icon:first-child {
+        margin-left: 0;
+      }
+      .ab-contacts .ab-label {
+        color: rgba(255, 255, 255, 0.92);
+        font-size: 1.05rem;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+      }
+      .ab-contacts .ab-hint {
+        color: rgba(200, 180, 120, 0.6);
+        font-size: 0.75rem;
+        margin-top: 1px;
+      }
+      .ab-contacts .ab-arr {
+        margin-left: auto;
+        flex-shrink: 0;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: rgba(160, 120, 20, 0.2);
+        border: 1px solid rgba(180, 140, 40, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* shared ab text */
+      .ab-text {
+        flex: 1;
+        text-align: left;
+        min-width: 0;
+      }
+      .ab-label {
+        display: block;
+        line-height: 1.2;
+      }
+      .ab-hint {
+        display: block;
+        font-weight: 400;
+      }
+
+      /* ── STICKY BAR ──────────────────────────── */
+      #sticky-bar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 200;
+        display: flex;
+        gap: 10px;
+        padding: 10px 16px;
+        padding-bottom: calc(10px + env(safe-area-inset-bottom));
+        background: rgba(5, 10, 22, 0.97);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.6);
+        transform: translateY(110%);
+        transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      #sticky-bar.show {
+        transform: translateY(0);
+      }
+      #sticky-bar.always-show {
+        transform: translateY(0) !important;
+      }
+      .sb-btn {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+        height: 50px;
+        border-radius: 13px;
+        font-size: 0.9rem;
+        font-weight: 700;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        font-family: var(--font);
+        -webkit-tap-highlight-color: transparent;
+        transition:
+          filter var(--t),
+          transform var(--t);
+      }
+      .sb-btn:active {
+        transform: scale(0.965);
+      }
+      .sb-btn:hover {
+        filter: brightness(1.1);
+      }
+      .sb-call {
+        background: linear-gradient(110deg, #b8880a, #e8b820, #f5d040, #e0a810);
+        color: #0a1200;
+        font-weight: 800;
+        box-shadow: 0 0 16px rgba(220, 170, 10, 0.4);
+      }
+      .sb-tg {
+        background: #229ed9;
+        color: #fff;
+      }
+
+      /* ═══ CONTACTS PAGE ═══ */
+      .page {
+        padding: 70px 16px 110px;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      .page-hero {
+        margin-bottom: 28px;
+      }
+      .page-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 14px;
+      }
+      .page-icon-tg {
+        background: rgba(34, 158, 217, 0.12);
+        border: 1.5px solid rgba(34, 158, 217, 0.3);
+      }
+      .page-icon-gold {
+        background: rgba(34, 197, 94, 0.1);
+        border: 1.5px solid rgba(34, 197, 94, 0.25);
+      }
+      .page-label-tg {
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #229ed9;
+        margin-bottom: 6px;
+      }
+      .page-label-gold {
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #22c55e;
+        margin-bottom: 6px;
+      }
+      .page-title {
+        font-size: clamp(1.5rem, 5.5vw, 2rem);
+        font-weight: 900;
+        letter-spacing: -0.03em;
+        line-height: 1.1;
+        margin-bottom: 8px;
+      }
+      .page-sub {
+        font-size: 0.87rem;
+        color: var(--text-dim);
+        line-height: 1.6;
+      }
+      .live-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(34, 197, 94, 0.1);
+        border: 1px solid rgba(34, 197, 94, 0.25);
+        border-radius: 50px;
+        padding: 5px 13px;
+        font-size: 0.72rem;
+        font-weight: 600;
+        color: #4ade80;
+        margin-bottom: 20px;
+      }
+      .sec-label {
+        font-size: 0.65rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.35);
+        margin: 24px 0 12px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .sec-label::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: rgba(255, 255, 255, 0.07);
+      }
+      .contact-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .c-card {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 16px 14px;
+        border-radius: 18px;
+        text-decoration: none;
+        position: relative;
+        overflow: hidden;
+        -webkit-tap-highlight-color: transparent;
+        transition:
+          transform var(--t),
+          filter var(--t);
+        border: 1.5px solid transparent;
+      }
+      .c-card:active {
+        transform: scale(0.975);
+      }
+      .c-card-tg {
+        background: linear-gradient(
+          135deg,
+          #0a2a40 0%,
+          #0d3655 40%,
+          #0f4068 70%,
+          #0a2a40 100%
+        );
+        border-color: rgba(34, 158, 217, 0.45);
+        box-shadow:
+          0 0 22px rgba(34, 158, 217, 0.2),
+          inset 0 1px 0 rgba(80, 200, 255, 0.1);
+      }
+      .c-card-tg:hover {
+        filter: brightness(1.1);
+        box-shadow:
+          0 0 32px rgba(34, 158, 217, 0.4),
+          inset 0 1px 0 rgba(80, 200, 255, 0.15);
+      }
+      .c-card-phone {
+        background: linear-gradient(
+          135deg,
+          #b8880a 0%,
+          #e8b820 30%,
+          #f5d040 55%,
+          #e0a810 80%,
+          #b07808 100%
+        );
+        box-shadow:
+          0 0 28px rgba(220, 170, 10, 0.45),
+          inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      }
+      .c-card-phone:hover {
+        filter: brightness(1.1);
+        box-shadow: 0 0 40px rgba(220, 170, 10, 0.65);
+      }
+      .c-card-email {
+        background: linear-gradient(
+          135deg,
+          #0e1a10 0%,
+          #122016 40%,
+          #152818 70%,
+          #0e1a10 100%
+        );
+        border-color: rgba(74, 222, 128, 0.3);
+        box-shadow:
+          0 0 18px rgba(74, 222, 128, 0.1),
+          inset 0 1px 0 rgba(100, 240, 140, 0.08);
+      }
+      .c-card-email:hover {
+        filter: brightness(1.1);
+        box-shadow: 0 0 28px rgba(74, 222, 128, 0.25);
+      }
+      .c-card-addr {
+        background: linear-gradient(
+          135deg,
+          #0e1220 0%,
+          #121828 40%,
+          #161e30 70%,
+          #0e1220 100%
+        );
+        border-color: rgba(180, 140, 40, 0.35);
+        box-shadow:
+          0 0 18px rgba(180, 140, 20, 0.15),
+          inset 0 1px 0 rgba(200, 160, 50, 0.08);
+        cursor: default;
+      }
+      .c-icon-wrap {
+        width: 48px;
+        height: 48px;
+        border-radius: 13px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .c-card-tg .c-icon-wrap {
+        background: rgba(34, 158, 217, 0.25);
+        border: 1px solid rgba(34, 158, 217, 0.4);
+      }
+      .c-card-phone .c-icon-wrap {
+        background: rgba(0, 0, 0, 0.22);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15);
+      }
+      .c-card-email .c-icon-wrap {
+        background: rgba(74, 222, 128, 0.15);
+        border: 1px solid rgba(74, 222, 128, 0.3);
+      }
+      .c-card-addr .c-icon-wrap {
+        background: rgba(180, 130, 10, 0.2);
+        border: 1px solid rgba(200, 160, 40, 0.3);
+      }
+      .c-text {
+        flex: 1;
+        min-width: 0;
+      }
+      .c-label {
+        display: block;
+        font-size: 1rem;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        line-height: 1.2;
+      }
+      .c-hint {
+        display: block;
+        font-size: 0.78rem;
+        font-weight: 500;
+        margin-top: 3px;
+        opacity: 0.7;
+      }
+      .c-card-tg .c-label {
+        color: #fff;
+      }
+      .c-card-tg .c-hint {
+        color: rgba(180, 230, 255, 0.7);
+      }
+      .c-card-phone .c-label {
+        color: #0f1e08;
+      }
+      .c-card-phone .c-hint {
+        color: rgba(15, 30, 8, 0.65);
+      }
+      .c-card-email .c-label {
+        color: #4ade80;
+      }
+      .c-card-email .c-hint {
+        color: rgba(150, 240, 180, 0.65);
+      }
+      .c-card-addr .c-label {
+        color: rgba(255, 255, 255, 0.9);
+      }
+      .c-card-addr .c-hint {
+        color: rgba(200, 170, 80, 0.65);
+      }
+      .c-arr {
+        flex-shrink: 0;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .c-card-tg .c-arr {
+        background: rgba(34, 158, 217, 0.2);
+        border: 1px solid rgba(34, 158, 217, 0.35);
+      }
+      .c-card-phone .c-arr {
+        background: rgba(0, 0, 0, 0.2);
+      }
+      .c-card-email .c-arr {
+        background: rgba(74, 222, 128, 0.15);
+        border: 1px solid rgba(74, 222, 128, 0.3);
+      }
+      .cta-bottom {
+        margin-top: 28px;
+        background: linear-gradient(
+          135deg,
+          #b8880a 0%,
+          #e8b820 30%,
+          #f5d040 55%,
+          #e0a810 80%,
+          #b07808 100%
+        );
+        border-radius: 20px;
+        padding: 24px 20px;
+        text-align: center;
+        box-shadow:
+          0 0 40px rgba(220, 170, 10, 0.3),
+          0 0 80px rgba(220, 170, 10, 0.1);
+        position: relative;
+        overflow: hidden;
+      }
+      .cta-bottom::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          ellipse 80% 60% at 50% 0%,
+          rgba(255, 255, 255, 0.18) 0%,
+          transparent 70%
+        );
+      }
+      .cta-emoji {
+        font-size: 2rem;
+        margin-bottom: 10px;
+        display: block;
+        position: relative;
+      }
+      .cta-title {
+        font-size: 1.25rem;
+        font-weight: 900;
+        color: #0a1200;
+        letter-spacing: -0.03em;
+        margin-bottom: 6px;
+        position: relative;
+      }
+      .cta-sub {
+        font-size: 0.82rem;
+        color: rgba(10, 18, 0, 0.65);
+        margin-bottom: 18px;
+        position: relative;
+      }
+      .cta-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        background: #0a1200;
+        color: #f0d070;
+        font-size: 0.95rem;
+        font-weight: 800;
+        padding: 14px 28px;
+        border-radius: 13px;
+        text-decoration: none;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        transition:
+          filter var(--t),
+          transform var(--t);
+        position: relative;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .cta-btn:active {
+        transform: scale(0.97);
+      }
+      .cta-btn:hover {
+        filter: brightness(1.15);
+      }
+
+      /* ═══ PRICES PAGE ═══ */
+      .search-wrap {
+        position: relative;
+        margin-bottom: 20px;
+      }
+      .search-input {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1.5px solid rgba(255, 255, 255, 0.12);
+        border-radius: 14px;
+        padding: 14px 16px 14px 46px;
+        font-size: 0.95rem;
+        color: #fff;
+        font-family: var(--font);
+        outline: none;
+        transition:
+          border-color var(--t),
+          background var(--t);
+        -webkit-appearance: none;
+      }
+      .search-input::placeholder {
+        color: rgba(255, 255, 255, 0.28);
+      }
+      .search-input:focus {
+        border-color: rgba(200, 168, 75, 0.5);
+        background: rgba(255, 255, 255, 0.09);
+      }
+      .search-icon {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        opacity: 0.4;
+        pointer-events: none;
+      }
+      .search-clear {
+        position: absolute;
+        right: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255, 255, 255, 0.1);
+        border: none;
+        border-radius: 50%;
+        width: 22px;
+        height: 22px;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.75rem;
+        font-family: var(--font);
+        -webkit-tap-highlight-color: transparent;
+      }
+      .search-clear.visible {
+        display: flex;
+      }
+      #no-results {
+        display: none;
+        text-align: center;
+        padding: 40px 20px;
+        color: var(--text-dim);
+        font-size: 0.9rem;
+      }
+      #no-results span {
+        font-size: 2rem;
+        display: block;
+        margin-bottom: 10px;
+      }
+      .cat-tabs {
+        display: flex;
+        gap: 8px;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 4px;
+        margin-bottom: 20px;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      .cat-tabs::-webkit-scrollbar {
+        display: none;
+      }
+      .cat-tab {
+        flex-shrink: 0;
+        padding: 7px 14px;
+        border-radius: 20px;
+        font-size: 0.78rem;
+        font-weight: 600;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.6);
+        cursor: pointer;
+        white-space: nowrap;
+        transition: all var(--t);
+        -webkit-tap-highlight-color: transparent;
+        font-family: var(--font);
+      }
+      .cat-tab:hover {
+        background: rgba(255, 255, 255, 0.09);
+        color: rgba(255, 255, 255, 0.9);
+      }
+      .cat-tab.active {
+        background: rgba(200, 168, 75, 0.15);
+        border-color: rgba(200, 168, 75, 0.4);
+        color: #f0d070;
+      }
+      .section-label {
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--text-dim);
+        margin-bottom: 12px;
+        margin-top: 24px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .section-label::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: rgba(255, 255, 255, 0.07);
+      }
+      .svc-card {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1.5px solid rgba(255, 255, 255, 0.08);
+        border-radius: 16px;
+        padding: 18px 16px;
+        margin-bottom: 10px;
+        transition:
+          border-color var(--t),
+          background var(--t);
+        cursor: pointer;
+      }
+      .svc-card:hover {
+        border-color: rgba(200, 168, 75, 0.3);
+        background: rgba(255, 255, 255, 0.06);
+      }
+      .svc-card.open {
+        border-color: rgba(200, 168, 75, 0.35);
+        background: rgba(200, 168, 75, 0.04);
+      }
+      .svc-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        justify-content: space-between;
+      }
+      .svc-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex: 1;
+        min-width: 0;
+      }
+      .svc-cat-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+      .svc-name {
+        font-size: 0.95rem;
+        font-weight: 700;
+        line-height: 1.2;
+      }
+      .svc-price-short {
+        font-size: 0.78rem;
+        font-weight: 600;
+        color: #f0d070;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+      .svc-chevron {
+        flex-shrink: 0;
+        opacity: 0.35;
+        transition:
+          transform var(--t),
+          opacity var(--t);
+      }
+      .svc-card.open .svc-chevron {
+        transform: rotate(180deg);
+        opacity: 0.7;
+      }
+      .svc-body {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.35s ease;
+      }
+      .svc-card.open .svc-body {
+        max-height: 600px;
+      }
+      .svc-body-inner {
+        padding-top: 14px;
+      }
+      .svc-desc {
+        font-size: 0.82rem;
+        color: var(--text-dim);
+        line-height: 1.65;
+        margin-bottom: 12px;
+      }
+      .price-rows {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 14px;
+      }
+      .price-row {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        background: rgba(255, 255, 255, 0.04);
+        border-radius: 10px;
+        padding: 10px 12px;
+      }
+      .price-row-amount {
+        font-size: 0.88rem;
+        font-weight: 700;
+        color: #f0d070;
+        white-space: nowrap;
+        flex-shrink: 0;
+        min-width: 110px;
+      }
+      .price-row-desc {
+        font-size: 0.8rem;
+        color: var(--text-dim);
+        line-height: 1.5;
+      }
+      .svc-note {
+        font-size: 0.75rem;
+        color: rgba(255, 255, 255, 0.35);
+        line-height: 1.6;
+        margin-bottom: 14px;
+        font-style: italic;
+      }
+      .svc-cta {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+        height: 46px;
+        border-radius: 11px;
+        background: linear-gradient(110deg, #b8880a, #e8b820, #f5d040, #e0a810);
+        color: #0a1200;
+        font-size: 0.88rem;
+        font-weight: 800;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        font-family: var(--font);
+        -webkit-tap-highlight-color: transparent;
+        transition:
+          filter var(--t),
+          transform var(--t);
+        box-shadow: 0 0 16px rgba(220, 170, 10, 0.3);
+      }
+      .svc-cta:active {
+        transform: scale(0.975);
+      }
+      .svc-cta:hover {
+        filter: brightness(1.08);
+      }
+      .svc-group {
+        transition: opacity var(--t);
+      }
+      .svc-group.hidden {
+        display: none;
+      }
+      .svc-card.hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- HEADER -->
+    <header id="header">
+      <button
+        class="logo-wrap"
+        onclick="showView('home')"
+        style="-webkit-tap-highlight-color: transparent"
+      >
+        <div class="logo-row">
+          <span class="logo-main"
+            ><span class="help">Help</span>&nbsp;<span class="ua"
+              >UA</span
+            ></span
+          >
+          <span class="badge-247">24/7</span>
+        </div>
+        <span class="logo-sub">Юридична допомога</span>
+      </button>
+      <div class="header-right" id="header-right">
+        <a href="tel:+380732251218" class="header-phone">
+          <svg
+            width="13"
+            height="13"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2.3"
+          >
+            <path
+              d="M22 16.92v3a2 2 0 01-2.18 2A19.79 19.79 0 013.06 6.18 2 2 0 015 4h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L9.09 11.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"
+            />
+          </svg>
+          +38 073-225-12-18
+        </a>
+      </div>
+    </header>
+
+    <!-- ══════════════ VIEW: HOME ══════════════ -->
+    <div id="view-home" class="view active">
+      <section id="hero">
+        <div class="hero-inner">
+          <div class="hero-label">
+            <span class="dot-live"></span>
+            Приймаємо звернення
+          </div>
+          <h1 class="hero-heading">
+            Захист <span class="accent">військового</span><br />і
+            <span class="accent">цивільного</span> права
+          </h1>
+          <div class="tags-wrap">
+            <div class="tags-row">
+              <span class="tag">ВЛК</span>
+              <span class="tag">СЗЧ</span>
+              <span class="tag">Виплати</span>
+              <span class="tag">Звільнення</span>
+              <span class="tag">Рапорти</span>
+              <span class="tag">Кредити</span>
+              <span class="tag">Ст. 130</span>
+              <span class="tag">Оскарження</span>
+              <span class="tag-etc">— вирішуємо швидко та конфіденційно.</span>
+            </div>
+          </div>
+          <div class="action-blocks">
+            <!-- 1. CALL -->
+            <div class="ab-call-wrap">
+              <div class="ab-online">
+                <span class="ab-online-dot"></span>
+                На зв'язку
+              </div>
+              <a href="tel:+380732251218" class="ab ab-call">
+                <div class="ab-icon-wrap">
+                  <svg
+                    width="24"
+                    height="24"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="#e8b820"
+                    stroke-width="2.2"
+                  >
+                    <path
+                      d="M22 16.92v3a2 2 0 01-2.18 2A19.79 19.79 0 013.06 6.18 2 2 0 015 4h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L9.09 11.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"
+                    />
+                  </svg>
+                </div>
+                <div class="ab-text">
+                  <span class="ab-label">Подзвонити зараз</span>
+                  <span class="ab-hint">Безкоштовна консультація</span>
+                </div>
+                <div class="ab-arr">
+                  <svg
+                    width="14"
+                    height="14"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="rgba(15,30,8,0.7)"
+                    stroke-width="3"
+                  >
+                    <path d="M9 18l6-6-6-6" />
+                  </svg>
+                </div>
+              </a>
+            </div>
+            <!-- 2. APPLICATION -->
+            <a href="application.html" class="ab ab-app">
+              <div class="ab-icon-wrap">
+                <svg
+                  width="22"
+                  height="22"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="rgba(140,190,255,0.9)"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                  />
+                </svg>
+              </div>
+              <div class="ab-text">
+                <span class="ab-label">Запросити консультацію</span>
+                <span class="ab-hint">Відповімо протягом 10 хв</span>
+              </div>
+              <div class="ab-badge">Швидко</div>
+            </a>
+            <!-- 3. PRICES -->
+            <button onclick="showView('prices')" class="ab ab-prices">
+              <div class="ab-icon-wrap">
+                <svg
+                  width="22"
+                  height="22"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="#d4a820"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+              <div class="ab-text">
+                <span class="ab-label">Дізнатись вартість</span>
+                <span class="ab-hint">Без прихованих платежів</span>
+              </div>
+              <div class="ab-arr">
+                <svg
+                  width="13"
+                  height="13"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="#d4a820"
+                  stroke-width="3"
+                >
+                  <path d="M9 18l6-6-6-6" />
+                </svg>
+              </div>
+            </button>
+            <!-- 4. CONTACTS -->
+            <button onclick="showView('contacts')" class="ab ab-contacts">
+              <div class="ab-multi-icons">
+                <div
+                  class="ab-mini-icon"
+                  style="
+                    background: #229ed9;
+                    width: 34px;
+                    height: 34px;
+                    border-radius: 50%;
+                  "
+                >
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="#fff">
+                    <path
+                      d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.247l-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L6.72 14.24l-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.838.945l-.74.4z"
+                    />
+                  </svg>
+                </div>
+                <div
+                  class="ab-mini-icon"
+                  style="
+                    background: linear-gradient(135deg, #b8880a, #e8b820);
+                    width: 34px;
+                    height: 34px;
+                    border-radius: 50%;
+                    margin-left: -8px;
+                  "
+                >
+                  <svg
+                    width="16"
+                    height="16"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="#0a1200"
+                    stroke-width="2.3"
+                  >
+                    <path
+                      d="M22 16.92v3a2 2 0 01-2.18 2A19.79 19.79 0 013.06 6.18 2 2 0 015 4h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L9.09 11.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"
+                    />
+                  </svg>
+                </div>
+                <div
+                  class="ab-mini-icon"
+                  style="
+                    background: rgba(160, 120, 20, 0.3);
+                    border: 1.5px solid rgba(180, 140, 40, 0.5);
+                    width: 34px;
+                    height: 34px;
+                    border-radius: 50%;
+                    margin-left: -8px;
+                  "
+                >
+                  <svg
+                    width="16"
+                    height="16"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="#d4a820"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                    />
+                    <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                </div>
+              </div>
+              <div class="ab-text">
+                <span class="ab-label">Зв'язатися з нами</span>
+                <span class="ab-hint">Telegram, телефон, адреса</span>
+              </div>
+              <div class="ab-arr">
+                <svg
+                  width="13"
+                  height="13"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="#d4a820"
+                  stroke-width="3"
+                >
+                  <path d="M9 18l6-6-6-6" />
+                </svg>
+              </div>
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ══════════════ VIEW: CONTACTS ══════════════ -->
+    <div id="view-contacts" class="view view-page">
+      <div class="page">
+        <div class="page-hero">
+          <div class="page-icon page-icon-tg">
+            <svg
+              width="24"
+              height="24"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="#229ED9"
+              stroke-width="2"
+            >
+              <path
+                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"
+              />
+            </svg>
+          </div>
+          <div class="page-label-tg">Зв'язок з нами</div>
+          <h1 class="page-title">Ми постійно<br />на зв'язку</h1>
+          <p class="page-sub">
+            Телефонуйте, пишіть у Telegram або на email — відповімо швидко та
+            конфіденційно.
+          </p>
+        </div>
+        <div class="live-badge">
+          <span class="dot-live"></span>
+          Зараз на зв'язку
+        </div>
+        <div class="sec-label">Канали зв'язку</div>
+        <div class="contact-list">
+          <a
+            href="https://t.me/volodumurshevchuk"
+            target="_blank"
+            rel="noopener"
+            class="c-card c-card-tg"
+          >
+            <div class="c-icon-wrap">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="#229ED9">
+                <path
+                  d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.247l-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L6.72 14.24l-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.838.945z"
+                />
+              </svg>
+            </div>
+            <div class="c-text">
+              <span class="c-label">@volodumurshevchuk</span>
+              <span class="c-hint">Telegram — відповідаємо 24/7</span>
+            </div>
+            <div class="c-arr">
+              <svg
+                width="13"
+                height="13"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="rgba(34,158,217,0.8)"
+                stroke-width="3"
+              >
+                <path d="M9 18l6-6-6-6" />
+              </svg>
+            </div>
+          </a>
+          <a href="tel:+380732251218" class="c-card c-card-phone">
+            <div class="c-icon-wrap">
+              <svg
+                width="24"
+                height="24"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="#0a1200"
+                stroke-width="2.2"
+              >
+                <path
+                  d="M22 16.92v3a2 2 0 01-2.18 2A19.79 19.79 0 013.06 6.18 2 2 0 015 4h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L9.09 11.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"
+                />
+              </svg>
+            </div>
+            <div class="c-text">
+              <span class="c-label">+38 073-225-12-18</span>
+              <span class="c-hint">Безкоштовна консультація</span>
+            </div>
+            <div class="c-arr">
+              <svg
+                width="13"
+                height="13"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="rgba(15,30,8,0.6)"
+                stroke-width="3"
+              >
+                <path d="M9 18l6-6-6-6" />
+              </svg>
+            </div>
+          </a>
+          <a
+            href="/cdn-cgi/l/email-protection#f085919194869f9b918484b0979d91999cde939f9d"
+            class="c-card c-card-email"
+          >
+            <div class="c-icon-wrap">
+              <svg
+                width="22"
+                height="22"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="#4ade80"
+                stroke-width="2"
+              >
+                <path
+                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                />
+              </svg>
+            </div>
+            <div class="c-text">
+              <span class="c-label"
+                ><span
+                  class="__cf_email__"
+                  data-cfemail="0d786c6c697b62666c79794d6a606c6461236e6260"
+                  >[email&#160;protected]</span
+                ></span
+              >
+              <span class="c-hint">Email — відповідаємо 24/7</span>
+            </div>
+            <div class="c-arr">
+              <svg
+                width="13"
+                height="13"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="rgba(74,222,128,0.7)"
+                stroke-width="3"
+              >
+                <path d="M9 18l6-6-6-6" />
+              </svg>
+            </div>
+          </a>
+          <div class="c-card c-card-addr">
+            <div class="c-icon-wrap">
+              <svg
+                width="22"
+                height="22"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="#d4a820"
+                stroke-width="2"
+              >
+                <path
+                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                />
+                <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+            </div>
+            <div class="c-text">
+              <span class="c-label">Вся Україна</span>
+              <span class="c-hint">Працюємо по всій Україні</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="cta-bottom">
+          <span class="cta-emoji">⚡</span>
+          <div class="cta-title">Не втрачай час — телефонуй!</div>
+          <div class="cta-sub">Безкоштовна консультація прямо зараз</div>
+          <a href="tel:+380732251218" class="cta-btn">
+            <svg
+              width="18"
+              height="18"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2.3"
+            >
+              <path
+                d="M22 16.92v3a2 2 0 01-2.18 2A19.79 19.79 0 013.06 6.18 2 2 0 015 4h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L9.09 11.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"
+              />
+            </svg>
+            +38 073-225-12-18
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════ VIEW: PRICES ══════════════ -->
+    <div id="view-prices" class="view view-page">
+      <div class="page">
+        <div class="page-hero">
+          <div class="page-icon page-icon-gold">
+            <svg
+              width="24"
+              height="24"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="#4ade80"
+              stroke-width="2"
+            >
+              <path
+                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+          </div>
+          <div class="page-label-gold">Прозоро і чесно</div>
+          <h1 class="page-title">Вартість послуг</h1>
+          <p class="page-sub">
+            Ціни орієнтовні — залежать від вашої ситуації. Перша консультація
+            безкоштовна.
+          </p>
+        </div>
+        <div class="search-wrap">
+          <svg
+            class="search-icon"
+            width="18"
+            height="18"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="white"
+            stroke-width="2"
+          >
+            <circle cx="11" cy="11" r="8" />
+            <path d="M21 21l-4.35-4.35" />
+          </svg>
+          <input
+            class="search-input"
+            type="text"
+            id="searchInput"
+            placeholder="Пошук послуги… (ВЛК, СЗЧ, звільнення…)"
+            autocomplete="off"
+          />
+          <button class="search-clear" id="searchClear" onclick="clearSearch()">
+            ✕
+          </button>
+        </div>
+        <div class="cat-tabs" id="catTabs">
+          <button class="cat-tab active" onclick="filterCat('all', this)">
+            Всі
+          </button>
+          <button class="cat-tab" onclick="filterCat('vlk', this)">ВЛК</button>
+          <button class="cat-tab" onclick="filterCat('szch', this)">СЗЧ</button>
+          <button class="cat-tab" onclick="filterCat('vyplaty', this)">
+            Виплати
+          </button>
+          <button class="cat-tab" onclick="filterCat('zvilnennya', this)">
+            Звільнення
+          </button>
+          <button class="cat-tab" onclick="filterCat('perevedennya', this)">
+            Переведення
+          </button>
+          <button class="cat-tab" onclick="filterCat('vidstrochka', this)">
+            Відстрочка
+          </button>
+          <button class="cat-tab" onclick="filterCat('civil', this)">
+            Цивільне
+          </button>
+          <button class="cat-tab" onclick="filterCat('other', this)">
+            Інше
+          </button>
+        </div>
+        <div id="no-results">
+          <span>🔍</span>Нічого не знайдено.<br />Спробуйте інший запит або
+          <a href="application.html" style="color: #f0d070">залиште заявку</a>.
+        </div>
+
+        <!-- ВЛК -->
+        <div class="svc-group" data-cat="vlk">
+          <div class="section-label">ВЛК</div>
+          <div
+            class="svc-card"
+            data-search="оскарження влк влк оскарження комісія"
+          >
+            <div class="svc-header">
+              <div class="svc-left">
+                <div class="svc-cat-dot" style="background: #f0d070"></div>
+                <div class="svc-name">Оскарження ВЛК</div>
+              </div>
+              <div class="svc-price-short">від 6 000 грн</div>
+              <svg
+                class="svc-chevron"
+                width="16"
+                height="16"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="white"
+                stroke-width="2.5"
+              >
+                <path d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+            <div class="svc-body">
+              <div class="svc-body-inner">
+                <p class="svc-desc">
+                  Ціни залежать від вашої індивідуальної ситуації. Нижче —
+                  приблизні орієнтири.
+                </p>
+                <div class="price-rows">
+                  <div class="price-row">
+                    <div class="price-row-amount">6 000 – 8 000 грн</div>
+                    <div class="price-row-desc">
+                      Скарга до Регіональної ВЛК + адвокатський запит до ТЦК
+                    </div>
+                  </div>
+                  <div class="price-row">
+                    <div class="price-row-amount">12 000 – 18 000 грн</div>
+                    <div class="price-row-desc">
+                      Скарга до Рег. ВЛК і ЦентрВЛК, 2 АЗ (ТЦК і Міноборони),
+                      скарги на нерозгляд
+                    </div>
+                  </div>
+                  <div class="price-row">
+                    <div class="price-row-amount">15 000 – 25 000 грн</div>
+                    <div class="price-row-desc">
+                      Все вищеперераховане + суд 1-ї інстанції під ключ
+                    </div>
+                  </div>
+                </div>
+                <p class="svc-note">
+                  Залишайте заявку і ми визначимо ціну вашої ситуації.
+                </p>
+                <a href="application.html" class="svc-cta">Залишити заявку</a>
+              </div>
+            </div>
+          </div>
+          <div class="svc-card" data-search="направлення влк влк направлення">
+            <div class="svc-header">
+              <div class="svc-left">
+                <div class="svc-cat-dot" style="background: #f0d070"></div>
+                <div class="svc-name">Направлення на ВЛК</div>
+              </div>
+              <div class="svc-price-short">від 5 000 грн</div>
+              <svg
+                class="svc-chevron"
+                width="16"
+                height="16"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="white"
+                stroke-width="2.5"
+              >
+                <path d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+            <div class="svc-body">
+              <div class="svc-body-inner">
+                <p class="svc-desc">
+                  Ціни залежать від вашої індивідуальної ситуації.
+                </p>
+                <div class="price-rows">
+                  <div class="price-row">
+                    <div class="price-row-amount">5 000 грн</div>
+                    <div class="price-row-desc">Рапорт і заява</div>
+                  </div>
+                  <div class="price-row">
+                    <div class="price-row-amount">12 000 грн</div>
+                    <div class="price-row-desc">
+                      Написання рапортів, заяв, скарг, консультативні послуги
+                      (під ключ)
+                    </div>
+                  </div>
+                </div>
+                <p class="svc-note">
+                  Залишайте заявку і ми визначимо ціну вашої ситуації.
+                </p>
+                <a href="application.html" class="svc-cta">Залишити заявку</a>
+              </div>
+            </div>
+          </div>
+          <div class="svc-card" data-search="направлення мсек мсек направлення">
+            <div class="svc-header">
+              <div class="svc-left">
+                <div class="svc-cat-dot" style="background: #f0d070"></div>
+                <div class="svc-name">Направлення на МСЕК</div>
+              </div>
+              <div class="svc-price-short">від 5 000 грн</div>
+              <svg
+                class="svc-chevron"
+                width="16"
+                height="16"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="white"
+                stroke-width="2.5"
+              >
+                <path d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+            <div class="svc-body">
+              <div class="svc-body-inner">
+                <div class="price-rows">
+                  <div class="price-row">
+                    <div class="price-row-amount">5 000 грн</div>
+                    <div class="price-row-desc">Рапорт і заява</div>
+                  </div>
+                  <div class="price-row">
+                    <div class="price-row-amount">12 000 грн</div>
+                    <div class="price-row-desc">
+                      Написання рапортів, заяв, скарг (під ключ)
+                    </div>
+                  </div>
+                </div>
+                <p class="svc-note">
+                  Залишайте заявку і ми визначимо ціну вашої ситуації.
+                </p>
+                <a href="application.html" class="svc-cta">Залишити заявку</a>
+              </div>
+            </div>
+          </div>
+          <div class="svc-card" data-search="перевірка влк аналіз влк">
+            <div class="svc-header">
+              <div class="svc-left">
+                <div class="svc-cat-dot" style="background: #f0d070"></div>
+                <div class="svc-name">Перевірка вашого ВЛК</div>
+              </div>
+              <div class="svc-price-short">від 1 000 грн</div>
+              <svg
+                class="svc-chevron"
+                width="16"
+                height="16"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="white"
+                stroke-width="2.5"
+              >
+                <path d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+            <div class="svc-body">
+              <div class="svc-body-inner">
+                <div class="price-rows">
+                  <div class="price-row">
+                    <div class="price-row-amount">1 000 грн</div>
+                    <div class="price-row-desc">
+                      Аналіз медичної документації в усному форматі
+                    </div>
+                  </div>
+                  <div class="price-row">
+                    <div class="price-row-amount">3 000 – 5 000 грн</div>
+                    <div class="price-row-desc">
+                      Письмовий правовий аналіз зі вказівкою статті та шансів на
+                      групу інвалідності
+                    </div>
+                  </div>
+                </div>
+                <p class="svc-note">
+                  Залишайте заявку і ми визначимо ціну вашої ситуації.
+                </p>
+                <a href="application.html" class="svc-cta">Залишити заявку</a>
+              </div>
+            </div>
+          </div>
+          <div
+            class="svc-card"
+            data-search="аналіз медичних документів медична документація"
+          >
+            <div class="svc-header">
+              <div class="svc-left">
+                <div class="svc-cat-dot" style="background: #f0d070"></div>
+                <div class="svc-name">Аналіз медичних документів</div>
+              </div>
+              <div class="svc-price-short">від 1 000 грн</div>
+              <svg
+                class="svc-chevron"
+                width="16"
+                height="16"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="white"
+                stroke-width="2.5"
+              >
+                <path d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+            <div class="svc-body">
+              <div class="svc-body-inner">
+                <div class="price-rows">
+                  <div class="price-row">
+                    <div class="price-row-amount">1 000 грн</div>
+                    <div class="price-row-desc">
+                      Аналіз медичної документації в усному форматі
+                    </div>
+                  </div>
+                  <div class="price-row">
+                    <div class="price-row-amount">3 000 – 5 000 грн</div>
+                    <div class="price-row-desc">
+                      Письмовий правовий аналіз із зазначенням статей та шансів
+                      на придатність / інвалідність
+                    </div>
+                  </div>
+                </div>
+                <p class="svc-note">
+                  Залишайте заявку і ми визначимо ціну вашої ситуації.
+                </p>
+                <a href="application.html" class="svc-cta">Залишити заявку</a>
+              </div>
+            </div>
+          </div>
+          <div class="svc-card" data-search="оскарження мсек мсек оскарження">
+            <div class="svc-header">
+              <div class="svc-left">
+                <div class="svc-cat-dot" style="background: #f0d070"></div>
+                <div class="svc-name">Оскарження МСЕК</div>
+              </div>
+              <div class="svc-price-short">від 12 000 грн</div>
+              <svg
+                class="svc-chevron"
+                width="16"
+                height="16"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="white"
+                stroke-width="2.5"
+              >
+                <path d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+            <div class="svc-body">
+              <div class="svc-body-inner">
+                <div class="price-rows">
+                  <div class="price-row">
+                    <div class="price-row-amount">12 000 – 25 000 грн</div>
+                    <div class="price-row-desc">
+                      Повний супровід оскарження рішення МСЕК
+                    </div>
+                  </div>
+                </div>
+                <p class="svc-note">
+                  Залишайте заявку і ми визначимо ціну вашої ситуації.
+                </p>
+                <a href="application.html" class="svc-cta">Залишити заявку</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- СЗЧ -->
+        <div class="svc-group" data-cat="szch">
+          <div class="section-label">СЗЧ</div>
+          <div
+            class="svc-card"
+            data-search="оскарження сзч сзч оскарження самовільне залишення частини"
+          >
+            <div class="svc-header">
+              <div class="svc-left">
+                <div class="svc-cat-dot" style="background: #f87171"></div>
+                <div class="svc-name">Оскарження СЗЧ</div>
+              </div>
+              <div class="svc-price-short">від 25 000 грн</div>
+              <svg
+                class="svc-chevron"
+                width="16"
+                height="16"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="white"
+                stroke-width="2.5"
+              >
+                <path d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+            <div class="svc-body">
+              <div class="svc-body-inner">
+                <p class="svc-desc">
+                  Послуга подібна до закриття СЗЧ. Зазвичай використовується,
+                  коли клієнт бажає повернутися до своєї частини, але потребує
+                  закриття СЗЧ.
+                </p>
+                <div class="price-rows">
+                  <div class="price-row">
+                    <div class="price-row-amount">25 000 – 45 000 грн</div>
+                    <div class="price-row-desc">
+                      Повний супровід під ключ: написання, відправка і контроль
+                      документів, пошук відношення при потребі, участь у судових
+                      процесах
+                    </div>
+                  </div>
+                </div>
+                <p class="svc-note">
+                  Залишайте заявку і ми визначимо ціну вашої ситуації.
+                </p>
+                <a href="application.html" class="svc-cta">Залишити заявку</a>
+              </div>
+            </div>
+          </div>
+          <div class="svc-card" data-search="закриття сзч сзч закрити">
+            <div class="svc-header">
+              <div class="svc-left">
+                <div class="svc-cat-dot" style="background: #f87171"></div>
+                <div class="svc-name">Закриття СЗЧ</div>
+              </div>
+              <div class="svc-price-short">від 25 000 грн</div>
+              <svg
+                class="svc-chevron"
+                width="16"
+                height="16"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="white"
+                stroke-width="2.5"
+              >
+                <path d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+            <div class="svc-body">
+              <div class="svc-body-inner">
+                <p class="svc-desc">
+                  На ціну впливає: тривалість СЗЧ, кількість випадків СЗЧ,
+                  обставини. Кожна ситуація оцінюється індивідуально.
+                </p>
+                <div class="price-rows">
+                  <div class="price-row">
+                    <div class="price-row-amount">25 000 – 45 000 грн</div>
+                    <div class="price-row-desc">
+                      Повний супровід під ключ: написання, відправка і контроль
+                      документів, пошук відношення, участь у судових процесах
+                    </div>
+                  </div>
+                </div>
+                <p class="svc-note">
+                  Залишайте заявку і ми визначимо ціну вашої ситуації.
+                </p>
+                <a href="application.html" class="svc-cta">Залишити заявку</a>
+              </div>
+            </div>
+          </div>
+          <div class="svc-card" data-search="перевірка сзч аналіз сзч">
+            <div class="svc-header">
+              <div class="svc-left">
+                <div class="svc-cat-dot" style="background: #f87171"></div>
+                <div class="svc-name">Перевірка вашого СЗЧ</div>
+              </div>
+              <div class="svc-price-short">від 4 400 грн</div>
+              <svg
+                class="svc-chevron"
+                width="16"
+                height="16"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="white"
+                stroke-width="2.5"
+              >
+                <path d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+            <div class="svc-body">
+              <div class="svc-body-inner">
+                <div class="price-rows">
+                  <div class="price-row">
+                    <div class="price-row-amount">4 400 – 6 600 грн</div>
+                    <div class="price-row-desc">
+                      Аналіз вашої ситуації та визначення подальших кроків
+                    </div>
+                  </div>
+                </div>
+                <p class="svc-note">
+                  Залишайте заявку і ми визначимо ціну вашої ситуації.
+                </p>
+                <a href="application.html" class="svc-cta">Залишити заявку</a>
+              </div>
+            </div>
+          </div>
+          <div class="svc-card" data-search="єрдр витяг єрдр отримання">
+            <div class="svc-header">
+              <div class="svc-left">
+                <div class="svc-cat-dot" style="background: #f87171"></div>
+                <div class="svc-name">Отримання витягу з ЄРДР</div>
+              </div>
+              <div class="svc-price-short">від 2 200 грн</div>
+              <svg
+                class="svc-chevron"
+                width="16"
+                height="16"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="white"
+                stroke-width="2.5"
+              >
+                <path d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+            <div class="svc-body">
+              <div class="svc-body-inner">
+                <div class="price-rows">
+                  <div class="price-row">
+                    <div class="price-row-amount">2 200 – 4 400 грн</div>
+                    <div class="price-row-desc">
+                      Отримання офіційного витягу з Єдиного реєстру досудових
+                      розслідувань
+                    </div>
+                  </div>
+                </div>
+                <p class="svc-note">
+                  Залишайте заявку і ми визначимо ціну вашої ситуації.
+                </p>
+                <a href="application.html" class="svc-cta">Залишити заявку</a>
+              </div>
+            </div>
+          </div>
+          <div
+            class="svc-card"
+            data-search="пошук відношення документ відношення"
+          >
+            <div class="svc-header">
+              <div class="svc-left">
+                <div class="svc-cat-dot" style="background: #f87171"></div>
+                <div class="svc-name">Пошук відношення</div>
+              </div>
+              <div class="svc-price-short">від 5 000 грн</div>
+              <svg
+                class="svc-chevron"
+                width="16"
+                height="16"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="white"
+                stroke-width="2.5"
+              >
+                <path d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+            <div class="svc-body">
+              <div class="svc-body-inner">
+                <p class="svc-desc">
+                  Ціна залежить від терміновості, побажань по частині та посаді.
+                </p>
+                <div class="price-rows">
+                  <div class="price-row">
+                    <div class="price-row-amount">5 000 – 12 000 грн</div>
+                    <div class="price-row-desc">
+                      Стандартний пошук відношення
+                    </div>
+                  </div>
+                  <div class="price-row">
+                    <div class="price-row-amount">до 30 000 грн+</div>
+                    <div class="price-row-desc">
+                      При специфічних побажаннях по частині, посаді або
+                      терміновості
+                    </div>
+                  </div>
+                </div>
+                <p class="svc-note">
+                  Залишайте заявку і ми визначимо ціну вашої ситуації.
+                </p>
+                <a href="application.html" class="svc-cta">Залишити заявку</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ВИПЛАТИ -->
+        <div class="svc-group" data-cat="vyplaty">
+          <div class="section-label">Виплати</div>
+          <div
+            class="svc-card"
+            data-search="огд одноразова грошова допомога виплата"
+          >
+            <div class="svc-header">
+              <div class="svc-left">
+                <div class="svc-cat-dot" style="background: #4ade80"></div>
+                <div class="svc-name">ОГД (одноразова грошова допомога)</div>
+              </div>
+              <div class="svc-price-short">від 5 000 грн</div>
+              <svg
+                class="svc-chevron"
+                width="16"
+                height="16"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="white"
+                stroke-width="2.5"
+              >
+                <path d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+            <div class="svc-body">
+              <div class="svc-body-inner">
+                <p class="svc-desc">
+                  Формат співпраці визначає ціну супроводу. Є три варіанти
+                  роботи:
+                </p>
+                <div class="price-rows">
+                  <div class="price-row">
+                    <div class="price-row-amount">15 000 – 30 000 грн</div>
+                    <div class="price-row-desc">
+                      Супровід під ключ без подальшого % з виплат
+                    </div>
+                  </div>
+                  <div class="price-row">
+                    <div class="price-row-amount">
+                      5 000 – 10 000 грн + 10–15%
+                    </div>
+                    <div class="price-row-desc">
+                      Початкова оплата + відсоток по результату отримання
+                      виплати
+                    </div>
+                  </div>
+                  <div class="price-row">
+                    <div class="price-row-amount">0 грн + 15–20%</div>
+                    <div class="price-row-desc">
+                      Без початкової оплати, збільшений відсоток по результату
+                    </div>
+                  </div>
+                </div>
+                <p class="svc-note">
+                  Залишайте заявку і ми визначимо ціну вашої ситуації.
+                </p>
+                <a href="application.html" class="svc-cta">Залишити заявку</a>
+              </div>
+            </div>
+          </div>
+          <div
+            class="svc-card"
+            data-search="контроль виплат перевірка виплат не виплатили проблеми з виплатами"
+          >
+            <div class="svc-header">
+              <div class="svc-left">
+                <div class="svc-cat-dot" style="background: #4ade80"></div>
+                <div class="svc-name">Контроль / перевірка виплат</div>
+              </div>
+              <div class="svc-price-short">від 5 500 грн</div>
+              <svg
+                class="svc-chevron"
+                width="16"
+                height="16"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="white"
+                stroke-width="2.5"
+              >
+                <path d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+            <div class="svc-body">
+              <div class="svc-body-inner">
+                <div class="price-rows">
+                  <div class="price-row">
+                    <div class="price-row-amount">5 500 – 8 800 грн</div>
+                    <div class="price-row-desc">
+                      Процес витребування і аналізу потрібних документів
+                    </div>
+                  </div>
+                </div>
+                <p class="svc-note">
+                  Залишайте заявку і ми визначимо ціну вашої ситуації.
+                </p>
+                <a href="application.html" class="svc-cta">Залишити заявку</a>
+              </div>
+            </div>
+          </div>
+          <div
+            class="svc-card"
+            data-search="не виплатили кошти проблеми виплати борг"
+          >
+            <div class="svc-header">
+              <div class="svc-left">
+                <div class="svc-cat-dot" style="background: #4ade80"></div>
+                <div class="svc-name">
+                  Не виплатили кошти / проблеми з виплатами
+                </div>
+              </div>
+              <div class="svc-price-short">від 5 500 грн</div>
+              <svg
+                class="svc-chevron"
+                width="16"
+                height="16"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="white"
+                stroke-width="2.5"
+              >
+                <path d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+            <div class="svc-body">
+              <div class="svc-body-inner">
+                <div class="price-rows">
+                  <div class="price-row">
+                    <div class="price-row-amount">5 500 – 8 800 грн</div>
+                    <div class="price-row-desc">
+                      Витребування і аналіз документів, визначення стратегії
+                    </div>
+                  </div>
+                </div>
+                <p class="svc-note">
+                  Залишайте заявку і ми визначимо ціну вашої ситуації.
+                </p>
+                <a href="application.html" class="svc-cta">Залишити заявку</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ЗВІЛЬНЕННЯ -->
+        <div class="svc-group" data-cat="zvilnennya">
+          <div class="section-label">Звільнення</div>
+          <div class="svc-card" data-search="рапорт написання рапорту">
+            <div class="svc-header">
+              <div class="svc-left">
+                <div class="svc-cat-dot" style="background: #60a5fa"></div>
+                <div class="svc-name">Написання рапорту</div>
+              </div>
+              <div class="svc-price-short">від 500 грн</div>
+              <svg
+                class="svc-chevron"
+                width="16"
+                height="16"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="white"
+                stroke-width="2.5"
+              >
+                <path d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+            <div class="svc-body">
+              <div class="svc-body-inner">
+                <div class="price-rows">
+                  <div class="price-row">
+                    <div class="price-row-amount">500 – 1 000 грн</div>
+                    <div class="price-row-desc">
+                      Складання рапорту будь-якого типу
+                    </div>
+                  </div>
+                </div>
+                <p class="svc-note">
+                  Залишайте заявку і ми визначимо ціну вашої ситуації.
+                </p>
+                <a href="application.html" class="svc-cta">Залишити заявку</a>
+              </div>
+            </div>
+          </div>
+          <div
+            class="svc-card"
+            data-search="супровід звільнення звільнення під ключ контракт"
+          >
+            <div class="svc-header">
+              <div class="svc-left">
+                <div class="svc-cat-dot" style="background: #60a5fa"></div>
+                <div class="svc-name">Супровід звільнення</div>
+              </div>
+              <div class="svc-price-short">від 5 550 грн</div>
+              <svg
+                class="svc-chevron"
+                width="16"
+                height="16"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="white"
+                stroke-width="2.5"
+              >
+                <path d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+            <div class="svc-body">
+              <div class="svc-body-inner">
+                <div class="price-rows">
+                  <div class="price-row">
+                    <div class="price-row-amount">5 550 грн</div>
+                    <div class="price-row-desc">
+                      Рапорт і адвокатський запит (самостійне вирішення)
+                    </div>
+                  </div>
+                  <div class="price-row">
+                    <div class="price-row-amount">12 000 – 15 000 грн</div>
+                    <div class="price-row-desc">
+                      Рапорт, збір документів, 3 АЗ, скарги до вищого
+                      командування
+                    </div>
+                  </div>
+                  <div class="price-row">
+                    <div class="price-row-amount">20 000 – 30 000 грн</div>
+                    <div class="price-row-desc">Повний супровід під ключ</div>
+                  </div>
+                </div>
+                <p class="svc-note">
+                  Залишайте заявку і ми визначимо ціну вашої ситуації.
+                </p>
+                <a href="application.html" class="svc-cta">Залишити заявку</a>
+              </div>
+            </div>
+          </div>
+          <div
+            class="svc-card"
+            data-search="контроль звільнення перевірка звільнення"
+          >
+            <div class="svc-header">
+              <div class="svc-left">
+                <div class="svc-cat-dot" style="background: #60a5fa"></div>
+                <div class="svc-name">Контроль звільнення</div>
+              </div>
+              <div class="svc-price-short">від 4 400 грн</div>
+              <svg
+                class="svc-chevron"
+                width="16"
+                height="16"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="white"
+                stroke-width="2.5"
+              >
+                <path d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+            <div class="svc-body">
+              <div class="svc-body-inner">
+                <div class="price-rows">
+                  <div class="price-row">
+                    <div class="price-row-amount">4 400 – 5 500 грн</div>
+                    <div class="price-row-desc">
+                      Аналіз потрібних документів та контроль процесу
+                    </div>
+                  </div>
+                </div>
+                <p class="svc-note">
+                  Залишайте заявку і ми визначимо ціну вашої ситуації.
+                </p>
+                <a href="application.html" class="svc-cta">Залишити заявку</a>
+              </div>
+            </div>
+          </div>
+          <div
+            class="svc-card"
+            data-search="чи можу звільнитися можливість звільнення аналіз"
+          >
+            <div class="svc-header">
+              <div class="svc-left">
+                <div class="svc-cat-dot" style="background: #60a5fa"></div>
+                <div class="svc-name">Чи можу я звільнитися?</div>
+              </div>
+              <div class="svc-price-short">від 1 000 грн</div>
+              <svg
+                class="svc-chevron"
+                width="16"
+                height="16"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="white"
+                stroke-width="2.5"
+              >
+                <path d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+            <div class="svc-body">
+              <div class="svc-body-inner">
+                <p class="svc-desc">
+                  Детальний аналіз вашої ситуації визначить можливість
+                  звільнення.
+                </p>
+                <div class="price-rows">
+                  <div class="price-row">
+                    <div class="price-row-amount">1 000 – 2 000 грн</div>
+                    <div class="price-row-desc">
+                      Правовий аналіз вашої ситуації та шансів на звільнення
+                    </div>
+                  </div>
+                </div>
+                <p class="svc-note">
+                  Залишайте заявку і ми визначимо ціну вашої ситуації.
+                </p>
+                <a href="application.html" class="svc-cta">Залишити заявку</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ПЕРЕВЕДЕННЯ -->
+        <div class="svc-group" data-cat="perevedennya">
+          <div class="section-label">Переведення</div>
+          <div
+            class="svc-card"
+            data-search="супровід переведення переведення під ключ"
+          >
+            <div class="svc-header">
+              <div class="svc-left">
+                <div class="svc-cat-dot" style="background: #a78bfa"></div>
+                <div class="svc-name">Супровід переведення</div>
+              </div>
+              <div class="svc-price-short">від 30 000 грн</div>
+              <svg
+                class="svc-chevron"
+                width="16"
+                height="16"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="white"
+                stroke-width="2.5"
+              >
+                <path d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+            <div class="svc-body">
+              <div class="svc-body-inner">
+                <div class="price-rows">
+                  <div class="price-row">
+                    <div class="price-row-amount">від 30 000 грн</div>
+                    <div class="price-row-desc">
+                      Повний супровід під ключ: написання, відправка і контроль
+                      документів, пошук відношення, участь у судових процесах
+                    </div>
+                  </div>
+                </div>
+                <p class="svc-note">
+                  Залишайте заявку і ми визначимо ціну вашої ситуації.
+                </p>
+                <a href="application.html" class="svc-cta">Залишити заявку</a>
+              </div>
+            </div>
+          </div>
+          <div
+            class="svc-card"
+            data-search="контроль переведення перевірка переведення"
+          >
+            <div class="svc-header">
+              <div class="svc-left">
+                <div class="svc-cat-dot" style="background: #a78bfa"></div>
+                <div class="svc-name">Контроль переведення</div>
+              </div>
+              <div class="svc-price-short">від 4 400 грн</div>
+              <svg
+                class="svc-chevron"
+                width="16"
+                height="16"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="white"
+                stroke-width="2.5"
+              >
+                <path d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+            <div class="svc-body">
+              <div class="svc-body-inner">
+                <div class="price-rows">
+                  <div class="price-row">
+                    <div class="price-row-amount">4 400 – 6 600 грн</div>
+                    <div class="price-row-desc">
+                      Аналіз і контроль процесу переведення
+                    </div>
+                  </div>
+                </div>
+                <p class="svc-note">
+                  Залишайте заявку і ми визначимо ціну вашої ситуації.
+                </p>
+                <a href="application.html" class="svc-cta">Залишити заявку</a>
+              </div>
+            </div>
+          </div>
+          <div
+            class="svc-card"
+            data-search="чи можу перевестися можливість переведення"
+          >
+            <div class="svc-header">
+              <div class="svc-left">
+                <div class="svc-cat-dot" style="background: #a78bfa"></div>
+                <div class="svc-name">Чи можу я перевестися?</div>
+              </div>
+              <div class="svc-price-short">1 000 грн</div>
+              <svg
+                class="svc-chevron"
+                width="16"
+                height="16"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="white"
+                stroke-width="2.5"
+              >
+                <path d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+            <div class="svc-body">
+              <div class="svc-body-inner">
+                <div class="price-rows">
+                  <div class="price-row">
+                    <div class="price-row-amount">1 000 грн</div>
+                    <div class="price-row-desc">
+                      Визначення ваших можливостей переведення
+                    </div>
+                  </div>
+                </div>
+                <p class="svc-note">
+                  Залишайте заявку і ми визначимо ціну вашої ситуації.
+                </p>
+                <a href="application.html" class="svc-cta">Залишити заявку</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ВІДСТРОЧКА -->
+        <div class="svc-group" data-cat="vidstrochka">
+          <div class="section-label">Відстрочка</div>
+          <div class="svc-card" data-search="відстрочка тцк тцк відстрочка">
+            <div class="svc-header">
+              <div class="svc-left">
+                <div class="svc-cat-dot" style="background: #fb923c"></div>
+                <div class="svc-name">Оформлення відстрочки</div>
+              </div>
+              <div class="svc-price-short">від 6 000 грн</div>
+              <svg
+                class="svc-chevron"
+                width="16"
+                height="16"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="white"
+                stroke-width="2.5"
+              >
+                <path d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+            <div class="svc-body">
+              <div class="svc-body-inner">
+                <div class="price-rows">
+                  <div class="price-row">
+                    <div class="price-row-amount">6 000 грн</div>
+                    <div class="price-row-desc">
+                      Підготовка заяви і документів, подача до ТЦК поштою +
+                      адвокатський запит для контролю
+                    </div>
+                  </div>
+                  <div class="price-row">
+                    <div class="price-row-amount">15 000 – 22 000 грн</div>
+                    <div class="price-row-desc">
+                      Під ключ: підготовка всіх документів, скарги, суд — до
+                      отримання результату
+                    </div>
+                  </div>
+                </div>
+                <p class="svc-note">
+                  Залишайте заявку і ми визначимо ціну вашої ситуації.
+                </p>
+                <a href="application.html" class="svc-cta">Залишити заявку</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ЦИВІЛЬНЕ -->
+        <div class="svc-group" data-cat="civil">
+          <div class="section-label">Цивільне право</div>
+          <div class="svc-card" data-search="розлучення розірвання шлюбу суд">
+            <div class="svc-header">
+              <div class="svc-left">
+                <div class="svc-cat-dot" style="background: #38bdf8"></div>
+                <div class="svc-name">Розлучення</div>
+              </div>
+              <div class="svc-price-short">від 4 500 грн</div>
+              <svg
+                class="svc-chevron"
+                width="16"
+                height="16"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="white"
+                stroke-width="2.5"
+              >
+                <path d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+            <div class="svc-body">
+              <div class="svc-body-inner">
+                <div class="price-rows">
+                  <div class="price-row">
+                    <div class="price-row-amount">4 500 грн</div>
+                    <div class="price-row-desc">
+                      Складання позовної заяви та роз'яснення правильної
+                      самостійної подачі
+                    </div>
+                  </div>
+                  <div class="price-row">
+                    <div class="price-row-amount">8 000 – 12 000 грн</div>
+                    <div class="price-row-desc">
+                      Під ключ: підготовка позову, подача до суду, участь через
+                      онлайн-суд, отримання рішення
+                    </div>
+                  </div>
+                </div>
+                <p class="svc-note">
+                  Залишайте заявку і ми визначимо ціну вашої ситуації.
+                </p>
+                <a href="application.html" class="svc-cta">Залишити заявку</a>
+              </div>
+            </div>
+          </div>
+          <div
+            class="svc-card"
+            data-search="кредити борги реструктуризація кредит"
+          >
+            <div class="svc-header">
+              <div class="svc-left">
+                <div class="svc-cat-dot" style="background: #38bdf8"></div>
+                <div class="svc-name">Кредити / борги</div>
+              </div>
+              <div class="svc-price-short">Індивідуально</div>
+              <svg
+                class="svc-chevron"
+                width="16"
+                height="16"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="white"
+                stroke-width="2.5"
+              >
+                <path d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+            <div class="svc-body">
+              <div class="svc-body-inner">
+                <p class="svc-desc">
+                  Питання кредитів, реструктуризації боргів, захист від
+                  колекторів — вирішуємо індивідуально.
+                </p>
+                <p class="svc-note">
+                  Залишайте заявку і ми визначимо ціну вашої ситуації.
+                </p>
+                <a href="application.html" class="svc-cta">Залишити заявку</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ІНШЕ -->
+        <div class="svc-group" data-cat="other">
+          <div class="section-label">Інше</div>
+          <div class="svc-card" data-search="убд статус учасника бойових дій">
+            <div class="svc-header">
+              <div class="svc-left">
+                <div class="svc-cat-dot" style="background: #e879f9"></div>
+                <div class="svc-name">Отримання УБД</div>
+              </div>
+              <div class="svc-price-short">від 5 000 грн</div>
+              <svg
+                class="svc-chevron"
+                width="16"
+                height="16"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="white"
+                stroke-width="2.5"
+              >
+                <path d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+            <div class="svc-body">
+              <div class="svc-body-inner">
+                <div class="price-rows">
+                  <div class="price-row">
+                    <div class="price-row-amount">5 000 грн</div>
+                    <div class="price-row-desc">
+                      Підготовка документів, заяви, адвокатський запит +
+                      роз'яснення самостійної подачі
+                    </div>
+                  </div>
+                  <div class="price-row">
+                    <div class="price-row-amount">10 000 – 15 000 грн</div>
+                    <div class="price-row-desc">
+                      Консультація, підготовка документів, АЗ до ТЦК, СП і
+                      головної комісії УБД
+                    </div>
+                  </div>
+                  <div class="price-row">
+                    <div class="price-row-amount">15 000 – 40 000 грн</div>
+                    <div class="price-row-desc">
+                      Повний супровід: аналіз документів, подача пакету,
+                      супровід через комісію, захист у разі відмови, скарги,
+                      позови, суд
+                    </div>
+                  </div>
+                </div>
+                <p class="svc-note">
+                  Залишайте заявку і ми визначимо ціну вашої ситуації.
+                </p>
+                <a href="application.html" class="svc-cta">Залишити заявку</a>
+              </div>
+            </div>
+          </div>
+          <div class="svc-card" data-search="зняття з розшуку розшук тцк">
+            <div class="svc-header">
+              <div class="svc-left">
+                <div class="svc-cat-dot" style="background: #e879f9"></div>
+                <div class="svc-name">Зняття з розшуку</div>
+              </div>
+              <div class="svc-price-short">від 2 500 грн</div>
+              <svg
+                class="svc-chevron"
+                width="16"
+                height="16"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="white"
+                stroke-width="2.5"
+              >
+                <path d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+            <div class="svc-body">
+              <div class="svc-body-inner">
+                <div class="price-rows">
+                  <div class="price-row">
+                    <div class="price-row-amount">2 500 грн</div>
+                    <div class="price-row-desc">
+                      Адвокатський запит до ТЦК, СП — отримання інформації та
+                      визначення подальших кроків
+                    </div>
+                  </div>
+                </div>
+                <p class="svc-note">
+                  По відповіді ТЦК буде зрозуміло, які подальші кроки потрібні.
+                </p>
+                <a href="application.html" class="svc-cta">Залишити заявку</a>
+              </div>
+            </div>
+          </div>
+          <div
+            class="svc-card"
+            data-search="підписка адвокат абонемент консультація виїзд"
+          >
+            <div class="svc-header">
+              <div class="svc-left">
+                <div class="svc-cat-dot" style="background: #e879f9"></div>
+                <div class="svc-name">Підписка на адвоката</div>
+              </div>
+              <div class="svc-price-short">500$ / 6 міс.</div>
+              <svg
+                class="svc-chevron"
+                width="16"
+                height="16"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="white"
+                stroke-width="2.5"
+              >
+                <path d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+            <div class="svc-body">
+              <div class="svc-body-inner">
+                <p class="svc-desc">
+                  В послугу входить: консультації, виїзд адвоката на місце
+                  затримання, супровід до ТЦК для зняття з розшуку.
+                </p>
+                <div class="price-rows">
+                  <div class="price-row">
+                    <div class="price-row-amount">500 USD</div>
+                    <div class="price-row-desc">
+                      Абонемент на 6 місяців. Всі деталі — на консультації.
+                    </div>
+                  </div>
+                </div>
+                <p class="svc-note">
+                  Залишайте заявку і ми визначимо ціну вашої ситуації.
+                </p>
+                <a href="application.html" class="svc-cta">Залишити заявку</a>
+              </div>
+            </div>
+          </div>
+          <div class="svc-card" data-search="не знайшов послугу інша послуга">
+            <div class="svc-header">
+              <div class="svc-left">
+                <div class="svc-cat-dot" style="background: #94a3b8"></div>
+                <div class="svc-name">Не знайшли потрібну послугу?</div>
+              </div>
+              <div class="svc-price-short">Запитайте нас</div>
+              <svg
+                class="svc-chevron"
+                width="16"
+                height="16"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="white"
+                stroke-width="2.5"
+              >
+                <path d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+            <div class="svc-body">
+              <div class="svc-body-inner">
+                <p class="svc-desc">
+                  Якщо ви не знайшли свою ситуацію в переліку — напишіть або
+                  зателефонуйте. Ми розбираємось з будь-якими
+                  військово-правовими та цивільними питаннями.
+                </p>
+                <a href="application.html" class="svc-cta">Залишити заявку</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STICKY BAR -->
+    <div id="sticky-bar">
+      <a href="tel:+380732251218" class="sb-btn sb-call">
+        <svg
+          width="17"
+          height="17"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2.3"
+        >
+          <path
+            d="M22 16.92v3a2 2 0 01-2.18 2A19.79 19.79 0 013.06 6.18 2 2 0 015 4h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L9.09 11.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"
+          />
+        </svg>
+        Подзвонити
+      </a>
+      <a
+        href="https://t.me/volodumurshevchuk"
+        target="_blank"
+        rel="noopener"
+        class="sb-btn sb-tg"
+      >
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.247l-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L6.72 14.24l-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.838.945l-.74.4z"
+          />
+        </svg>
+        Telegram
+      </a>
+    </div>
+
+    <script>
+      /* ══════════════ VIEW ROUTER ══════════════ */
+      var currentView = "home";
+
+      function showView(view) {
+        var prev = currentView;
+        document.querySelectorAll(".view").forEach(function (v) {
+          v.classList.remove("active", "anim-slide-in", "anim-slide-back");
+        });
+        var el = document.getElementById("view-" + view);
+        el.classList.add("active");
+        // animate: going deeper → slide in from right; going home → slide back from left
+        if (view === "home") {
+          el.classList.add("anim-slide-back");
+        } else {
+          el.classList.add("anim-slide-in");
+        }
+        currentView = view;
+        window.scrollTo(0, 0);
+
+        var headerRight = document.getElementById("header-right");
+        var stickyBar = document.getElementById("sticky-bar");
+
+        if (view === "home") {
+          headerRight.innerHTML =
+            '<a href="tel:+380732251218" class="header-phone"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.3"><path d="M22 16.92v3a2 2 0 01-2.18 2A19.79 19.79 0 013.06 6.18 2 2 0 015 4h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L9.09 11.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>+38 073-225-12-18</a>';
+          stickyBar.classList.remove("always-show");
+          updateStickyBar();
+        } else {
+          headerRight.innerHTML =
+            '<button class="back-btn" onclick="showView(\'home\')"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Назад</button><a href="tel:+380732251218" class="header-phone"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.3"><path d="M22 16.92v3a2 2 0 01-2.18 2A19.79 19.79 0 013.06 6.18 2 2 0 015 4h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L9.09 11.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>+38 073-225-12-18</a>';
+          stickyBar.classList.add("always-show");
+        }
+      }
+
+      /* ══════════════ PRICES PAGE ACCORDION ══════════════ */
+      document
+        .querySelectorAll("#view-prices .svc-card")
+        .forEach(function (card) {
+          card.addEventListener("click", function (e) {
+            if (e.target.closest(".svc-cta")) return;
+            var isOpen = card.classList.contains("open");
+            document
+              .querySelectorAll("#view-prices .svc-card.open")
+              .forEach(function (c) {
+                c.classList.remove("open");
+              });
+            if (!isOpen) card.classList.add("open");
+          });
+        });
+
+      /* PRICES PAGE SEARCH */
+      var searchInput = document.getElementById("searchInput");
+      var searchClear = document.getElementById("searchClear");
+      var noResults = document.getElementById("no-results");
+      searchInput.addEventListener("input", function () {
+        var q = this.value.trim().toLowerCase();
+        searchClear.classList.toggle("visible", q.length > 0);
+        runSearch(q);
+      });
+      function clearSearch() {
+        searchInput.value = "";
+        searchClear.classList.remove("visible");
+        runSearch("");
+      }
+      function runSearch(q) {
+        var cards = document.querySelectorAll("#view-prices .svc-card");
+        var groups = document.querySelectorAll("#view-prices .svc-group");
+        var found = 0;
+        if (!q) {
+          cards.forEach(function (c) {
+            c.classList.remove("hidden");
+          });
+          applyCurrentCat();
+          noResults.style.display = "none";
+          return;
+        }
+        groups.forEach(function (g) {
+          g.classList.remove("hidden");
+        });
+        cards.forEach(function (card) {
+          var text =
+            (card.dataset.search || "") +
+            " " +
+            (card.querySelector(".svc-name") || {}).textContent;
+          var match = text.toLowerCase().includes(q);
+          card.classList.toggle("hidden", !match);
+          if (match) found++;
+        });
+        groups.forEach(function (g) {
+          var visible = g.querySelectorAll(".svc-card:not(.hidden)").length;
+          g.classList.toggle("hidden", visible === 0);
+        });
+        noResults.style.display = found === 0 ? "block" : "none";
+      }
+      function filterCat(cat, btn) {
+        document
+          .querySelectorAll("#view-prices .cat-tab")
+          .forEach(function (t) {
+            t.classList.remove("active");
+          });
+        btn.classList.add("active");
+        searchInput.value = "";
+        searchClear.classList.remove("visible");
+        noResults.style.display = "none";
+        var groups = document.querySelectorAll("#view-prices .svc-group");
+        var cards = document.querySelectorAll("#view-prices .svc-card");
+        cards.forEach(function (c) {
+          c.classList.remove("hidden");
+        });
+        if (cat === "all") {
+          groups.forEach(function (g) {
+            g.classList.remove("hidden");
+          });
+        } else {
+          groups.forEach(function (g) {
+            g.classList.toggle("hidden", g.dataset.cat !== cat);
+          });
+        }
+      }
+      function applyCurrentCat() {
+        var activeBtn = document.querySelector("#view-prices .cat-tab.active");
+        if (activeBtn)
+          filterCat(
+            activeBtn.textContent === "Всі"
+              ? "all"
+              : activeBtn.dataset.cat || "all",
+            activeBtn,
+          );
+      }
+
+      /* ══════════════ STICKY BAR (home only) ══════════════ */
+      function updateStickyBar() {
+        if (currentView !== "home") return;
+        var bar = document.getElementById("sticky-bar");
+        var hero = document.getElementById("hero");
+        var b = hero.getBoundingClientRect().bottom;
+        if (b < window.innerHeight * 0.55) {
+          bar.classList.add("show");
+        } else {
+          bar.classList.remove("show");
+        }
+      }
+      window.addEventListener("scroll", updateStickyBar, { passive: true });
+      window.addEventListener("resize", updateStickyBar, { passive: true });
+      updateStickyBar();
+    </script>
+  </body>
+</html>
