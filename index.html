@@ -721,11 +721,11 @@
       }
       #sticky-bar.show {
         transform: translateY(0);
-        visibility: hidden;
+        visibility: visible;
       }
       #sticky-bar.always-show {
         transform: translateY(0) !important;
-        visibility: hidden;
+        visibility: visible;
       }
       .sb-btn {
         flex: 1;
@@ -817,6 +817,139 @@
         color: var(--text-dim);
         line-height: 1.6;
       }
+
+      /* ═══ APPLICATION FORM ═══ */
+      .page-icon-app {
+        background: rgba(91, 143, 255, 0.12);
+        border: 1.5px solid rgba(91, 143, 255, 0.25);
+      }
+      .page-label-app {
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #5b8fff;
+        margin-bottom: 6px;
+      }
+      .form-group {
+        margin-bottom: 14px;
+      }
+      .form-group label {
+        display: block;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.5);
+        margin-bottom: 6px;
+      }
+      .form-input,
+      .form-textarea {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1.5px solid rgba(255, 255, 255, 0.12);
+        border-radius: 10px;
+        padding: 13px 14px;
+        font-size: 0.95rem;
+        color: #fff;
+        font-family: var(--font);
+        outline: none;
+        transition:
+          border-color var(--t),
+          background var(--t);
+        -webkit-appearance: none;
+      }
+      .form-input::placeholder,
+      .form-textarea::placeholder {
+        color: rgba(255, 255, 255, 0.25);
+      }
+      .form-input:focus,
+      .form-textarea:focus {
+        border-color: rgba(200, 168, 75, 0.55);
+        background: rgba(255, 255, 255, 0.09);
+      }
+      select.form-input {
+        cursor: pointer;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.4)' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 14px center;
+        padding-right: 36px;
+      }
+      select.form-input option {
+        background: #0f2040;
+        color: #fff;
+      }
+      .form-textarea {
+        resize: vertical;
+        min-height: 90px;
+      }
+      .form-note {
+        font-size: 0.72rem;
+        color: rgba(255, 255, 255, 0.3);
+        line-height: 1.6;
+        margin-top: 10px;
+      }
+      .cta-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+        height: 52px;
+        border-radius: 12px;
+        font-size: 0.95rem;
+        font-weight: 700;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        font-family: var(--font);
+        -webkit-tap-highlight-color: transparent;
+        transition:
+          filter var(--t),
+          transform var(--t);
+        margin-top: 4px;
+      }
+      .cta-btn:active {
+        transform: scale(0.975);
+      }
+      .cta-btn:hover {
+        filter: brightness(1.08);
+      }
+      .cta-gold {
+        background: linear-gradient(110deg, #b8880a, #e8b820, #f5d040, #e0a810);
+        color: #0a1200;
+        box-shadow: 0 0 16px rgba(220, 170, 10, 0.3);
+      }
+      #form-success {
+        display: none;
+        background: rgba(74, 222, 128, 0.1);
+        border: 1px solid rgba(74, 222, 128, 0.3);
+        border-radius: 10px;
+        padding: 14px;
+        color: #4ade80;
+        font-size: 0.88rem;
+        text-align: center;
+        margin-top: 10px;
+      }
+
+      /* clickable hero label + tags */
+      .hero-label {
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+        transition:
+          background var(--t),
+          border-color var(--t),
+          color var(--t);
+      }
+      .hero-label:hover {
+        background: rgba(200, 168, 75, 0.12);
+        border-color: rgba(200, 168, 75, 0.32);
+        color: rgba(240, 208, 80, 0.9);
+      }
+      .tag {
+        cursor: pointer;
+      }
+
       .live-badge {
         display: inline-flex;
         align-items: center;
@@ -1415,7 +1548,13 @@
     <div id="view-home" class="view active">
       <section id="hero">
         <div class="hero-inner">
-          <div class="hero-label">
+          <div
+            class="hero-label"
+            role="button"
+            tabindex="0"
+            onclick="showView('application')"
+            onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showView('application');}"
+          >
             <span class="dot-live"></span>
             Приймаємо звернення
           </div>
@@ -1425,14 +1564,14 @@
           </h1>
           <div class="tags-wrap">
             <div class="tags-row">
-              <span class="tag">ВЛК</span>
-              <span class="tag">СЗЧ</span>
-              <span class="tag">Виплати</span>
-              <span class="tag">Звільнення</span>
-              <span class="tag">Рапорти</span>
-              <span class="tag">Кредити</span>
-              <span class="tag">Ст. 130</span>
-              <span class="tag">Оскарження</span>
+              <span class="tag" onclick="showView('application','ВЛК — військово-лікарська комісія')">ВЛК</span>
+              <span class="tag" onclick="showView('application','СЗЧ — самовільне залишення частини')">СЗЧ</span>
+              <span class="tag" onclick="showView('application','Виплати та компенсації')">Виплати</span>
+              <span class="tag" onclick="showView('application','Звільнення зі служби')">Звільнення</span>
+              <span class="tag" onclick="showView('application','Рапорти та документи')">Рапорти</span>
+              <span class="tag" onclick="showView('application','Інше')">Кредити</span>
+              <span class="tag" onclick="showView('application','Інше')">Ст. 130</span>
+              <span class="tag" onclick="showView('application','Оскарження рішень')">Оскарження</span>
               <span class="tag-etc">— вирішуємо швидко та конфіденційно.</span>
             </div>
           </div>
@@ -1477,7 +1616,7 @@
               </a>
             </div>
             <!-- 2. APPLICATION -->
-            <a href="application.html" class="ab ab-app">
+            <a href="#" onclick="event.preventDefault();showView('application');" class="ab ab-app">
               <div class="ab-icon-wrap">
                 <svg
                   width="22"
@@ -1620,6 +1759,78 @@
       </section>
     </div>
 
+    <!-- ══════════════ VIEW: APPLICATION ══════════════ -->
+    <div id="view-application" class="view view-page">
+      <div class="page">
+        <div class="page-hero">
+          <div class="page-icon page-icon-app">
+            <svg
+              width="26"
+              height="26"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="#89acff"
+              stroke-width="2"
+            >
+              <path
+                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+              />
+            </svg>
+          </div>
+          <div class="page-label-app">Заявка онлайн</div>
+          <h1 class="page-title">Залишити заявку</h1>
+          <p class="page-sub">Перша консультація безкоштовна</p>
+        </div>
+
+        <div class="form-group">
+          <label for="f-name">Ваше ім'я</label>
+          <input
+            class="form-input"
+            type="text"
+            id="f-name"
+            placeholder="Як до вас звертатись"
+            autocomplete="given-name"
+          />
+        </div>
+        <div class="form-group">
+          <label for="f-phone">Номер телефону</label>
+          <input
+            class="form-input"
+            type="tel"
+            id="f-phone"
+            placeholder="+380 ___ ___ __ __"
+            autocomplete="tel"
+          />
+        </div>
+        <div class="form-group">
+          <label for="f-topic">Тема звернення</label>
+          <select class="form-input" id="f-topic">
+            <option value="" disabled selected>Оберіть напрямок</option>
+            <option>ВЛК — військово-лікарська комісія</option>
+            <option>СЗЧ — самовільне залишення частини</option>
+            <option>Виплати та компенсації</option>
+            <option>Звільнення зі служби</option>
+            <option>Рапорти та документи</option>
+            <option>Оскарження рішень</option>
+            <option>Інше</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="f-msg">Коротко про ситуацію</label>
+          <textarea
+            class="form-textarea"
+            id="f-msg"
+            placeholder="Опишіть в кількох словах — що сталось або що вас турбує"
+          ></textarea>
+        </div>
+        <button class="svc-cta cta-gold" onclick="submitForm()" type="button">
+          Надіслати заявку
+        </button>
+        <div id="form-success">✓ Заявку отримано. Зв'яжемось з вами найближчим часом.</div>
+        <p class="form-note">Орієнтовний час на контакт з Вами до 5-10 хвилин</p>
+      </div>
+    </div>
+
     <!-- ══════════════ VIEW: CONTACTS ══════════════ -->
     <div id="view-contacts" class="view view-page">
       <div class="page">
@@ -1707,47 +1918,6 @@
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="rgba(15,30,8,0.6)"
-                stroke-width="3"
-              >
-                <path d="M9 18l6-6-6-6" />
-              </svg>
-            </div>
-          </a>
-          <a
-            href="/cdn-cgi/l/email-protection#f085919194869f9b918484b0979d91999cde939f9d"
-            class="c-card c-card-email"
-          >
-            <div class="c-icon-wrap">
-              <svg
-                width="22"
-                height="22"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="#4ade80"
-                stroke-width="2"
-              >
-                <path
-                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                />
-              </svg>
-            </div>
-            <div class="c-text">
-              <span class="c-label"
-                ><span
-                  class="__cf_email__"
-                  data-cfemail="0d786c6c697b62666c79794d6a606c6461236e6260"
-                  >[email&#160;protected]</span
-                ></span
-              >
-              <span class="c-hint">Email — відповідаємо 24/7</span>
-            </div>
-            <div class="c-arr">
-              <svg
-                width="13"
-                height="13"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="rgba(74,222,128,0.7)"
                 stroke-width="3"
               >
                 <path d="M9 18l6-6-6-6" />
@@ -1876,7 +2046,7 @@
         </div>
         <div id="no-results">
           <span>🔍</span>Нічого не знайдено.<br />Спробуйте інший запит або
-          <a href="application.html" style="color: #f0d070">залиште заявку</a>.
+          <a href="#" onclick="event.preventDefault();showView('application');" style="color: #f0d070; cursor: pointer;">залиште заявку</a>.
         </div>
 
         <!-- ВЛК -->
@@ -1934,7 +2104,7 @@
                 <p class="svc-note">
                   Залишайте заявку і ми визначимо ціну вашої ситуації.
                 </p>
-                <a href="application.html" class="svc-cta">Залишити заявку</a>
+                <a href="#" onclick="event.preventDefault();showView('application');" class="svc-cta">Залишити заявку</a>
               </div>
             </div>
           </div>
@@ -1978,7 +2148,7 @@
                 <p class="svc-note">
                   Залишайте заявку і ми визначимо ціну вашої ситуації.
                 </p>
-                <a href="application.html" class="svc-cta">Залишити заявку</a>
+                <a href="#" onclick="event.preventDefault();showView('application');" class="svc-cta">Залишити заявку</a>
               </div>
             </div>
           </div>
@@ -2018,7 +2188,7 @@
                 <p class="svc-note">
                   Залишайте заявку і ми визначимо ціну вашої ситуації.
                 </p>
-                <a href="application.html" class="svc-cta">Залишити заявку</a>
+                <a href="#" onclick="event.preventDefault();showView('application');" class="svc-cta">Залишити заявку</a>
               </div>
             </div>
           </div>
@@ -2061,7 +2231,7 @@
                 <p class="svc-note">
                   Залишайте заявку і ми визначимо ціну вашої ситуації.
                 </p>
-                <a href="application.html" class="svc-cta">Залишити заявку</a>
+                <a href="#" onclick="event.preventDefault();showView('application');" class="svc-cta">Залишити заявку</a>
               </div>
             </div>
           </div>
@@ -2107,7 +2277,7 @@
                 <p class="svc-note">
                   Залишайте заявку і ми визначимо ціну вашої ситуації.
                 </p>
-                <a href="application.html" class="svc-cta">Залишити заявку</a>
+                <a href="#" onclick="event.preventDefault();showView('application');" class="svc-cta">Залишити заявку</a>
               </div>
             </div>
           </div>
@@ -2143,7 +2313,7 @@
                 <p class="svc-note">
                   Залишайте заявку і ми визначимо ціну вашої ситуації.
                 </p>
-                <a href="application.html" class="svc-cta">Залишити заявку</a>
+                <a href="#" onclick="event.preventDefault();showView('application');" class="svc-cta">Залишити заявку</a>
               </div>
             </div>
           </div>
@@ -2194,7 +2364,7 @@
                 <p class="svc-note">
                   Залишайте заявку і ми визначимо ціну вашої ситуації.
                 </p>
-                <a href="application.html" class="svc-cta">Залишити заявку</a>
+                <a href="#" onclick="event.preventDefault();showView('application');" class="svc-cta">Залишити заявку</a>
               </div>
             </div>
           </div>
@@ -2235,7 +2405,7 @@
                 <p class="svc-note">
                   Залишайте заявку і ми визначимо ціну вашої ситуації.
                 </p>
-                <a href="application.html" class="svc-cta">Залишити заявку</a>
+                <a href="#" onclick="event.preventDefault();showView('application');" class="svc-cta">Залишити заявку</a>
               </div>
             </div>
           </div>
@@ -2271,7 +2441,7 @@
                 <p class="svc-note">
                   Залишайте заявку і ми визначимо ціну вашої ситуації.
                 </p>
-                <a href="application.html" class="svc-cta">Залишити заявку</a>
+                <a href="#" onclick="event.preventDefault();showView('application');" class="svc-cta">Залишити заявку</a>
               </div>
             </div>
           </div>
@@ -2308,7 +2478,7 @@
                 <p class="svc-note">
                   Залишайте заявку і ми визначимо ціну вашої ситуації.
                 </p>
-                <a href="application.html" class="svc-cta">Залишити заявку</a>
+                <a href="#" onclick="event.preventDefault();showView('application');" class="svc-cta">Залишити заявку</a>
               </div>
             </div>
           </div>
@@ -2357,7 +2527,7 @@
                 <p class="svc-note">
                   Залишайте заявку і ми визначимо ціну вашої ситуації.
                 </p>
-                <a href="application.html" class="svc-cta">Залишити заявку</a>
+                <a href="#" onclick="event.preventDefault();showView('application');" class="svc-cta">Залишити заявку</a>
               </div>
             </div>
           </div>
@@ -2420,7 +2590,7 @@
                 <p class="svc-note">
                   Залишайте заявку і ми визначимо ціну вашої ситуації.
                 </p>
-                <a href="application.html" class="svc-cta">Залишити заявку</a>
+                <a href="#" onclick="event.preventDefault();showView('application');" class="svc-cta">Залишити заявку</a>
               </div>
             </div>
           </div>
@@ -2459,7 +2629,7 @@
                 <p class="svc-note">
                   Залишайте заявку і ми визначимо ціну вашої ситуації.
                 </p>
-                <a href="application.html" class="svc-cta">Залишити заявку</a>
+                <a href="#" onclick="event.preventDefault();showView('application');" class="svc-cta">Залишити заявку</a>
               </div>
             </div>
           </div>
@@ -2500,7 +2670,7 @@
                 <p class="svc-note">
                   Залишайте заявку і ми визначимо ціну вашої ситуації.
                 </p>
-                <a href="application.html" class="svc-cta">Залишити заявку</a>
+                <a href="#" onclick="event.preventDefault();showView('application');" class="svc-cta">Залишити заявку</a>
               </div>
             </div>
           </div>
@@ -2541,7 +2711,7 @@
                 <p class="svc-note">
                   Залишайте заявку і ми визначимо ціну вашої ситуації.
                 </p>
-                <a href="application.html" class="svc-cta">Залишити заявку</a>
+                <a href="#" onclick="event.preventDefault();showView('application');" class="svc-cta">Залишити заявку</a>
               </div>
             </div>
           </div>
@@ -2591,7 +2761,7 @@
                 <p class="svc-note">
                   Залишайте заявку і ми визначимо ціну вашої ситуації.
                 </p>
-                <a href="application.html" class="svc-cta">Залишити заявку</a>
+                <a href="#" onclick="event.preventDefault();showView('application');" class="svc-cta">Залишити заявку</a>
               </div>
             </div>
           </div>
@@ -2630,7 +2800,7 @@
                 <p class="svc-note">
                   Залишайте заявку і ми визначимо ціну вашої ситуації.
                 </p>
-                <a href="application.html" class="svc-cta">Залишити заявку</a>
+                <a href="#" onclick="event.preventDefault();showView('application');" class="svc-cta">Залишити заявку</a>
               </div>
             </div>
           </div>
@@ -2673,7 +2843,7 @@
                 <p class="svc-note">
                   Залишайте заявку і ми визначимо ціну вашої ситуації.
                 </p>
-                <a href="application.html" class="svc-cta">Залишити заявку</a>
+                <a href="#" onclick="event.preventDefault();showView('application');" class="svc-cta">Залишити заявку</a>
               </div>
             </div>
           </div>
@@ -2718,7 +2888,7 @@
                 <p class="svc-note">
                   Залишайте заявку і ми визначимо ціну вашої ситуації.
                 </p>
-                <a href="application.html" class="svc-cta">Залишити заявку</a>
+                <a href="#" onclick="event.preventDefault();showView('application');" class="svc-cta">Залишити заявку</a>
               </div>
             </div>
           </div>
@@ -2757,7 +2927,7 @@
                 <p class="svc-note">
                   Залишайте заявку і ми визначимо ціну вашої ситуації.
                 </p>
-                <a href="application.html" class="svc-cta">Залишити заявку</a>
+                <a href="#" onclick="event.preventDefault();showView('application');" class="svc-cta">Залишити заявку</a>
               </div>
             </div>
           </div>
@@ -2796,7 +2966,7 @@
                 <p class="svc-note">
                   Залишайте заявку і ми визначимо ціну вашої ситуації.
                 </p>
-                <a href="application.html" class="svc-cta">Залишити заявку</a>
+                <a href="#" onclick="event.preventDefault();showView('application');" class="svc-cta">Залишити заявку</a>
               </div>
             </div>
           </div>
@@ -2845,7 +3015,7 @@
                 <p class="svc-note">
                   Залишайте заявку і ми визначимо ціну вашої ситуації.
                 </p>
-                <a href="application.html" class="svc-cta">Залишити заявку</a>
+                <a href="#" onclick="event.preventDefault();showView('application');" class="svc-cta">Залишити заявку</a>
               </div>
             </div>
           </div>
@@ -2894,7 +3064,7 @@
                 <p class="svc-note">
                   Залишайте заявку і ми визначимо ціну вашої ситуації.
                 </p>
-                <a href="application.html" class="svc-cta">Залишити заявку</a>
+                <a href="#" onclick="event.preventDefault();showView('application');" class="svc-cta">Залишити заявку</a>
               </div>
             </div>
           </div>
@@ -2929,7 +3099,7 @@
                 <p class="svc-note">
                   Залишайте заявку і ми визначимо ціну вашої ситуації.
                 </p>
-                <a href="application.html" class="svc-cta">Залишити заявку</a>
+                <a href="#" onclick="event.preventDefault();showView('application');" class="svc-cta">Залишити заявку</a>
               </div>
             </div>
           </div>
@@ -2986,7 +3156,7 @@
                 <p class="svc-note">
                   Залишайте заявку і ми визначимо ціну вашої ситуації.
                 </p>
-                <a href="application.html" class="svc-cta">Залишити заявку</a>
+                <a href="#" onclick="event.preventDefault();showView('application');" class="svc-cta">Залишити заявку</a>
               </div>
             </div>
           </div>
@@ -3023,7 +3193,7 @@
                 <p class="svc-note">
                   По відповіді ТЦК буде зрозуміло, які подальші кроки потрібні.
                 </p>
-                <a href="application.html" class="svc-cta">Залишити заявку</a>
+                <a href="#" onclick="event.preventDefault();showView('application');" class="svc-cta">Залишити заявку</a>
               </div>
             </div>
           </div>
@@ -3066,7 +3236,7 @@
                 <p class="svc-note">
                   Залишайте заявку і ми визначимо ціну вашої ситуації.
                 </p>
-                <a href="application.html" class="svc-cta">Залишити заявку</a>
+                <a href="#" onclick="event.preventDefault();showView('application');" class="svc-cta">Залишити заявку</a>
               </div>
             </div>
           </div>
@@ -3096,7 +3266,7 @@
                   зателефонуйте. Ми розбираємось з будь-якими
                   військово-правовими та цивільними питаннями.
                 </p>
-                <a href="application.html" class="svc-cta">Залишити заявку</a>
+                <a href="#" onclick="event.preventDefault();showView('application');" class="svc-cta">Залишити заявку</a>
               </div>
             </div>
           </div>
@@ -3122,7 +3292,7 @@
         Подзвонити
       </a>
       <a
-        href="https://t.me/volodumurshevchuk"
+        href="https://t.me/Xelpua24"
         target="_blank"
         rel="noopener"
         class="sb-btn sb-tg"
@@ -3140,13 +3310,34 @@
       /* ══════════════ VIEW ROUTER ══════════════ */
       var currentView = "home";
 
-      function showView(view) {
+      function showView(view, topic) {
         var prev = currentView;
         document.querySelectorAll(".view").forEach(function (v) {
           v.classList.remove("active", "anim-slide-in", "anim-slide-back");
         });
         var el = document.getElementById("view-" + view);
         el.classList.add("active");
+
+        if (view === "application") {
+          var topicSel = document.getElementById("f-topic");
+          if (topicSel) {
+            if (topic) {
+              var matched = false;
+              for (var i = 0; i < topicSel.options.length; i++) {
+                if (topicSel.options[i].text === topic) {
+                  topicSel.selectedIndex = i;
+                  matched = true;
+                  break;
+                }
+              }
+              if (!matched) topicSel.selectedIndex = 0;
+            } else {
+              topicSel.selectedIndex = 0;
+            }
+          }
+          var successEl = document.getElementById("form-success");
+          if (successEl) successEl.style.display = "none";
+        }
         // animate: going deeper → slide in from right; going home → slide back from left
         if (view === "home") {
           el.classList.add("anim-slide-back");
@@ -3276,6 +3467,57 @@
       window.addEventListener("scroll", updateStickyBar, { passive: true });
       window.addEventListener("resize", updateStickyBar, { passive: true });
       updateStickyBar();
+
+      /* ══════════════ APPLICATION FORM SUBMIT ══════════════ */
+      async function submitForm() {
+        var n = document.getElementById("f-name").value.trim();
+        var p = document.getElementById("f-phone").value.trim();
+        var t = document.getElementById("f-topic").value;
+        var m = document.getElementById("f-msg").value.trim();
+
+        if (!n || !p) {
+          alert("Будь ласка, заповніть ім'я та телефон.");
+          return;
+        }
+
+        var BOT_TOKEN = "8845502409:AAHnpwT4OKIZcF54F567FGT1Ym8hCQ6Q_aA";
+        var CHAT_ID = "-5104182810";
+
+        var text =
+          "📋 *Нова заявка з сайту HelpUA*\n" +
+          "🔵 *ЕФІР*\n\n" +
+          "👤 *Ім'я:* " + n + "\n" +
+          "📞 *Телефон:* " + p + "\n" +
+          "📌 *Тема:* " + (t || "не обрано") + "\n" +
+          "💬 *Опис:* " + (m || "не вказано");
+
+        try {
+          await fetch(
+            "https://api.telegram.org/bot" + BOT_TOKEN + "/sendMessage",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                chat_id: CHAT_ID,
+                text: text,
+                parse_mode: "Markdown",
+              }),
+            },
+          );
+        } catch (e) {
+          console.error("Telegram error:", e);
+        }
+
+        var s = document.getElementById("form-success");
+        s.style.display = "block";
+        document.getElementById("f-name").value = "";
+        document.getElementById("f-phone").value = "";
+        document.getElementById("f-msg").value = "";
+        document.getElementById("f-topic").selectedIndex = 0;
+        setTimeout(function () {
+          s.style.display = "none";
+        }, 6000);
+      }
     </script>
   </body>
 </html>
